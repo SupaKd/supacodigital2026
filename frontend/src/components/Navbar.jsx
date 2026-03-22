@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { Icon } from '../icons'
 import { CALENDLY_URL } from '../config'
 
-export default function Navbar() {
+export default function Navbar({ navLogoRef }) {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
 
@@ -18,7 +18,7 @@ export default function Navbar() {
     <div className={`nav-wrap${scrolled ? ' scrolled' : ''}`}>
     <nav className="nav" aria-label="Navigation principale">
       <a href="#accueil" className="nav-logo">
-        <img src="/logo2026.webp" alt="Supaco Digital — retour accueil" />
+        <img ref={navLogoRef} src="/logo2026.webp" alt="Supaco Digital — retour accueil" />
         <span className="nav-logo-text">Supaco<span>.</span>Digital</span>
       </a>
 

@@ -1,4 +1,6 @@
+import { useState, useRef } from 'react'
 import './App.css'
+import Loader from './components/Loader'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import About from './components/About'
@@ -12,9 +14,18 @@ import Chatbot from './components/Chatbot'
 import ScrollToTop from './components/ScrollToTop'
 
 export default function App() {
+  const [loaded, setLoaded] = useState(false)
+  const navLogoRef = useRef(null)
+
   return (
     <>
-      <Navbar />
+      {!loaded && (
+        <Loader
+          onDone={() => setLoaded(true)}
+          navLogoRef={navLogoRef}
+        />
+      )}
+      <Navbar navLogoRef={navLogoRef} />
       <main>
         <Hero />
         <div className="divider divider--dark" />
