@@ -5,6 +5,7 @@ import About from './components/About'
 import Services from './components/Services'
 import Projects from './components/Projects'
 import Testimonials from './components/Testimonials'
+import Zone from './components/Zone'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import Chatbot from './components/Chatbot'
@@ -24,6 +25,8 @@ export default function App() {
         <Projects />
         <div className="divider" />
         <Testimonials />
+        <div className="divider" />
+        <Zone />
         <div className="divider" />
         <Contact />
       </main>

@@ -30,7 +30,7 @@ export default function About() {
           </h2>
           <p className="about-role">Fondateur & Développeur · Supaco Digital</p>
           <p className="about-bio">
-            Supaco Digital, c'est une agence web indépendante basée à Saint-Genis-Pouilly, créée pour aider les <mark className="about-mark">PME locales, indépendants et e-commerces</mark> à <mark className="about-mark">gagner plus de clients</mark> grâce à des sites performants.
+            Supaco Digital, c'est une agence web indépendante basée à Saint-Genis-Pouilly dans le Pays de Gex, créée pour aider les <mark className="about-mark">PME locales, indépendants et e-commerces</mark> à <mark className="about-mark">gagner plus de clients</mark> grâce à des sites performants.
             <br /><br />
             Pas de template générique. Chaque projet est conçu <mark className="about-mark">sur mesure</mark>, avec du code propre et une obsession pour les <mark className="about-mark">résultats concrets</mark> — plus de visibilité, plus de contacts, plus de ventes.
           </p>

@@ -60,7 +60,7 @@
 .hero-title {
   font-family: var(--ff-ui);
   font-weight: 900;
-  line-height: 1.0;
+  line-height: 1;
   font-size: clamp(56px, 7.5vw, 110px);
   text-transform: uppercase;
   letter-spacing: -2px;
@@ -87,7 +87,7 @@
 .hero-desc {
   font-size: 16px;
   color: var(--white);
-  max-width: 480px;
+  max-width: 530px;
   line-height: 1.8;
   margin-bottom: 44px;
   animation: fade-up 0.5s 0.24s ease both;
@@ -118,7 +118,8 @@
   font-size: 44px;
   line-height: 1;
   background: var(--accent-gradient);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 .hero-stat-lbl {
@@ -197,7 +198,9 @@
     padding-top: 36px;
     align-items: center;
   }
-  .hero-badge { text-align: center; }
+  .hero-badge {
+    text-align: center;
+  }
   .hero-stats {
     gap: 24px;
     justify-content: center;

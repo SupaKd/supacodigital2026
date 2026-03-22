@@ -12,7 +12,7 @@ export default function Contact() {
           <div className="section-label">Contact</div>
           <h2 className="section-title">Démarrons <em>ensemble</em></h2>
           <p className="contact-desc">
-            Parlez-moi de votre projet et recevez une réponse sous 24h. Ou réservez directement un appel découverte gratuit de 30 min.
+            Vous êtes dans le Pays de Gex, à Genève ou ailleurs ? Parlez-moi de votre projet et recevez une réponse sous 24h. Ou réservez directement un appel découverte gratuit de 30 min.
           </p>
           <div className="contact-items">
             <div className="contact-item">

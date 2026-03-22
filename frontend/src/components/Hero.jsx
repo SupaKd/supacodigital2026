@@ -17,7 +17,7 @@ export default function Hero() {
         </h1>
         <p className="hero-sub">Votre site web, votre meilleur commercial.</p>
         <p className="hero-desc">
-          Supaco Digital conçoit des sites et applications qui attirent,
+          Agence web dans le Pays de Gex, Supaco Digital conçoit des sites et applications qui attirent,
           convainquent et convertissent — pour que les PME, indépendants et
           e-commerces gagnent de nouveaux clients chaque jour.
         </p>
