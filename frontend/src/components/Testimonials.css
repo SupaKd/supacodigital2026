@@ -1,0 +1,112 @@
+.testimonials {
+  background: #f5f2ee;
+  isolation: isolate;
+  overflow: hidden;
+}
+.testimonials .section-label { color: rgba(15,15,22,.55); }
+.testimonials .section-title { color: #0f0f16; }
+
+/* ── Scroll track ────────────────────────────────────── */
+.testi-track-wrap {
+  margin-top: 52px;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 6%, #000 94%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, #000 6%, #000 94%, transparent 100%);
+}
+.testi-track {
+  display: flex;
+  gap: 16px;
+  width: max-content;
+  animation: scroll-left 36s linear infinite;
+}
+.testi-track:hover { animation-play-state: paused; }
+@keyframes scroll-left {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .testi-track { animation: none; }
+}
+
+/* ── Card — Google style ─────────────────────────────── */
+.testi-card {
+  flex-shrink: 0;
+  width: 300px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: 0 1px 3px rgba(60,64,67,.08), 0 2px 8px rgba(60,64,67,.10);
+  transition: box-shadow .25s;
+  cursor: default;
+}
+.testi-card:hover {
+  box-shadow: 0 4px 12px rgba(60,64,67,.15), 0 8px 24px rgba(60,64,67,.12);
+}
+
+/* ── Top row: avatar + google logo ───────────────────── */
+.testi-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.testi-author {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.testi-avatar {
+  width: 40px; height: 40px; flex-shrink: 0;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Google Sans', 'Roboto', sans-serif;
+  font-weight: 500; font-size: 16px;
+  color: #fff;
+  user-select: none;
+}
+.testi-author-info { display: flex; flex-direction: column; }
+.testi-name {
+  font-family: 'Google Sans', 'Roboto', Arial, sans-serif;
+  font-weight: 500; font-size: 14px;
+  color: #202124;
+  line-height: 1.3;
+}
+.testi-role {
+  font-family: 'Roboto', Arial, sans-serif;
+  font-size: 12px; color: #70757a;
+  margin-top: 1px;
+  line-height: 1.3;
+}
+.testi-google-logo {
+  width: 24px; height: 24px; flex-shrink: 0; margin-top: 2px;
+}
+
+/* ── Stars + date ────────────────────────────────────── */
+.testi-rating-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.testi-stars {
+  display: flex;
+  gap: 1px;
+}
+.testi-date {
+  font-family: 'Roboto', Arial, sans-serif;
+  font-size: 12px; color: #70757a;
+}
+
+/* ── Review text ─────────────────────────────────────── */
+.testi-text {
+  font-family: 'Roboto', Arial, sans-serif;
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: #3c4043;
+}
+
+@media (max-width: 768px) {
+  .testi-card { width: 260px; padding: 16px; }
+  .testimonials .section-label { justify-content: center; }
+  .testimonials .section-title { text-align: center; }
+}

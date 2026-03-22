@@ -1,0 +1,120 @@
+.svc-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  margin-top: 56px;
+  background: var(--border-soft);
+}
+
+.svc-card {
+  background: var(--black-card);
+  padding: 40px 36px;
+  position: relative;
+  overflow: hidden;
+  cursor: default;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: background .3s, transform .3s;
+}
+
+.svc-card:hover {
+  background: var(--black-soft);
+  transform: translateY(-4px);
+  z-index: 1;
+}
+
+/* ── Trait top animé ─────────────────────────────────── */
+.svc-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--cyan), var(--blue));
+  transform: scaleX(0); transform-origin: left;
+  transition: transform .4s cubic-bezier(.4,0,.2,1);
+}
+.svc-card:hover::before { transform: scaleX(1); }
+
+/* ── Num + icône ─────────────────────────────────────── */
+.svc-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.svc-num {
+  font-family: var(--ff-ui); font-size: 11px; font-weight: 700;
+  letter-spacing: 3px; color: var(--cyan); opacity: .45;
+}
+
+.svc-icon {
+  width: 36px; height: 36px; color: var(--white-dim);
+  transition: color .3s, filter .3s;
+}
+.svc-card:hover .svc-icon {
+  color: var(--cyan);
+  filter: drop-shadow(0 0 8px var(--cyan-glow));
+}
+
+/* ── Titre ───────────────────────────────────────────── */
+.svc-title {
+  font-family: var(--ff-ui); font-weight: 800; font-size: 19px;
+  text-transform: uppercase; letter-spacing: -.2px;
+  color: var(--white); line-height: 1.15;
+}
+
+/* ── Contenu hover ───────────────────────────────────── */
+.svc-hover {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: max-height .4s cubic-bezier(.4,0,.2,1),
+              opacity .3s .05s,
+              transform .3s .05s;
+}
+
+.svc-card:hover .svc-hover {
+  max-height: 200px;
+  opacity: 1;
+  transform: none;
+}
+
+.svc-desc {
+  font-size: 13px; color: var(--white-dim); line-height: 1.75;
+}
+
+.svc-list {
+  list-style: none;
+  display: flex; flex-direction: column; gap: 6px;
+}
+.svc-list li {
+  font-family: var(--ff-ui); font-size: 11px; font-weight: 600;
+  letter-spacing: 1px; color: var(--white-dim);
+  display: flex; align-items: center; gap: 8px;
+}
+.svc-list li::before {
+  content: ''; width: 4px; height: 4px;
+  background: var(--cyan); border-radius: 50%; flex-shrink: 0;
+}
+
+/* ── Glow ────────────────────────────────────────────── */
+.svc-glow {
+  position: absolute; bottom: -60px; right: -60px;
+  width: 180px; height: 180px; border-radius: 50%;
+  background: radial-gradient(circle, var(--cyan-dim), transparent 70%);
+  opacity: 0; transition: opacity .4s; pointer-events: none;
+}
+.svc-card:hover .svc-glow { opacity: 1; }
+
+/* ── Responsive ──────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .svc-grid { grid-template-columns: 1fr 1fr; }
+  .svc-card:hover { transform: none; }
+}
+
+@media (max-width: 640px) {
+  .svc-grid { grid-template-columns: 1fr; }
+}

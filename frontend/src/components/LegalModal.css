@@ -1,0 +1,67 @@
+.legal-overlay {
+  position: fixed; inset: 0; z-index: 500;
+  background: rgba(5,6,15,.85);
+  backdrop-filter: blur(6px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px;
+  animation: fade-in .2s ease;
+}
+@keyframes fade-in { from{opacity:0} to{opacity:1} }
+
+.legal-modal {
+  background: #fff;
+  border-radius: 16px;
+  width: 100%; max-width: 600px;
+  max-height: 80vh;
+  display: flex; flex-direction: column;
+  box-shadow: 0 24px 80px rgba(0,0,0,.5);
+  animation: modal-up .25s ease;
+  overflow: hidden;
+}
+@keyframes modal-up { from{transform:translateY(16px);opacity:0} to{transform:none;opacity:1} }
+
+.legal-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 22px 28px;
+  border-bottom: 1px solid rgba(15,15,22,.1);
+  flex-shrink: 0;
+}
+.legal-title {
+  font-family: var(--ff-ui); font-weight: 900; font-size: 18px;
+  text-transform: uppercase; letter-spacing: -.3px;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.legal-close {
+  background: none; border: none; cursor: pointer;
+  color: rgba(15,15,22,.4); padding: 4px;
+  border-radius: 6px; transition: color .2s, background .2s;
+  display: flex; align-items: center;
+}
+.legal-close:hover { color: #0f0f16; background: rgba(15,15,22,.06); }
+.legal-close svg { width: 20px; height: 20px; }
+
+.legal-body {
+  padding: 28px;
+  overflow-y: auto;
+  color: #3c3c4a;
+  font-family: var(--ff-body);
+  font-size: 14px;
+  line-height: 1.8;
+  scrollbar-width: thin;
+}
+.legal-body h3 {
+  font-family: var(--ff-ui); font-weight: 800; font-size: 13px;
+  text-transform: uppercase; letter-spacing: 1px;
+  color: #0f0f16; margin: 24px 0 8px;
+}
+.legal-body h3:first-child { margin-top: 0; }
+.legal-body p { margin-bottom: 8px; }
+.legal-body a { color: #1a6bff; text-decoration: none; }
+.legal-body a:hover { text-decoration: underline; }
+
+@media (max-width: 640px) {
+  .legal-modal { max-height: 90vh; border-radius: 16px 16px 0 0; }
+  .legal-overlay { align-items: flex-end; padding: 0; }
+}
