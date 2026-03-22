@@ -2,9 +2,10 @@
   background: #f5f2ee;
   isolation: isolate;
   overflow: hidden;
+  position: relative;
 }
-.testimonials .section-label { color: rgba(15,15,22,.55); }
-.testimonials .section-title { color: #0f0f16; }
+.testimonials .section-label { color: rgba(15,15,22,.55); position: relative; z-index: 1; }
+.testimonials .section-title { color: #0f0f16; position: relative; z-index: 1; }
 
 /* ── Scroll track ────────────────────────────────────── */
 .testi-track-wrap {

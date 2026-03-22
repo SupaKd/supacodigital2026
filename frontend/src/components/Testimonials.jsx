@@ -1,42 +1,44 @@
+import LightBg from './LightBg'
+
 const reviews = [
   {
-    name: 'Sophie M.',
-    role: 'Gérante — Sabai Thoiry',
-    text: 'Notre application de commandes a complètement transformé notre service. Les clients adorent la simplicité et nous avons réduit les erreurs de commande de 80%.',
+    name: 'Rootiweb',
+    role: 'Avis Google',
+    text: 'Bonne collaboration avec cette agence pour la création de mon site vitrine et la mise en place de mon CRM. Équipe professionnelle, réactive et à l\'écoute. Le travail a été réalisé sérieusement. Je recommande.',
     stars: 5,
-    date: 'il y a 2 mois',
+    date: 'il y a 6 jours',
     color: '#1a73e8',
   },
   {
-    name: 'Marc B.',
-    role: 'Conseiller — MB Patrimoine Finance',
-    text: "Site professionnel livré en un temps record. Kevin a parfaitement compris l'image que je voulais projeter à mes clients. Résultat impeccable.",
+    name: 'Melissa',
+    role: 'Avis Google',
+    text: 'Je suis ravie de la collaboration avec Supaco Digital pour la création de mon site internet. Tout a été réalisé dans le respect de mes attentes, avec une grande écoute et un vrai professionnalisme.',
     stars: 5,
-    date: 'il y a 3 mois',
+    date: 'il y a une semaine',
     color: '#34a853',
   },
   {
-    name: 'Laure D.',
-    role: 'Fondatrice — Studio Créatif',
-    text: 'Un vrai partenaire, pas juste un prestataire. Il anticipe les besoins, communique parfaitement et le rendu final dépasse mes attentes.',
+    name: 'Kenneth Lam',
+    role: 'Avis Google',
+    text: 'Compétent et professionnel.',
     stars: 5,
-    date: 'il y a 1 mois',
+    date: 'il y a 3 semaines',
     color: '#ea4335',
   },
   {
-    name: 'Thomas R.',
-    role: 'Dirigeant — PME locale',
-    text: "Depuis la refonte de notre site, nous recevons 3× plus de demandes de devis. L'investissement a été rentabilisé en moins de deux mois.",
+    name: 'Gémeaux',
+    role: 'Avis Google',
+    text: 'Professionnel, disponible et réactif. Les prestations sont de qualité. Je recommande !',
     stars: 5,
-    date: 'il y a 4 mois',
+    date: 'il y a 3 mois',
     color: '#fbbc04',
   },
   {
-    name: 'Camille V.',
-    role: 'E-commerçante',
-    text: "Réactif, créatif et de bon conseil. Supaco Digital m'a aidée à lancer ma boutique dans les délais et avec un budget maîtrisé.",
+    name: 'Béatrice SEM',
+    role: 'Avis Google',
+    text: 'Très professionnel, rapide et rigoureux. Après un premier échange, il a tout de suite compris notre projet et a su nous accompagner sur la création de notre boutique en ligne avec beaucoup de créativité !',
     stars: 5,
-    date: 'il y a 2 mois',
+    date: 'il y a 5 mois',
     color: '#9c27b0',
   },
 ]
@@ -93,6 +95,7 @@ export default function Testimonials() {
 
   return (
     <section className="section testimonials" id="avis" aria-label="Témoignages clients">
+      <LightBg variant="b" />
       <div className="section-label">Témoignages</div>
       <h2 className="section-title">Ce que disent<br /><em>mes clients</em></h2>
 

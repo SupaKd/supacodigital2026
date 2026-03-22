@@ -1,3 +1,4 @@
+/* ── Grid ────────────────────────────────────────────── */
 .svc-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -6,6 +7,7 @@
   background: var(--border-soft);
 }
 
+/* ── Card ────────────────────────────────────────────── */
 .svc-card {
   background: var(--black-card);
   padding: 40px 36px;
@@ -14,25 +16,74 @@
   cursor: default;
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  transition: background .3s, transform .3s;
+  gap: 18px;
+  transition: background .35s, transform .35s;
+  --svc-color: var(--cyan);
+  --svc-glow: rgba(0,229,255,.18);
 }
 
 .svc-card:hover {
   background: var(--black-soft);
-  transform: translateY(-4px);
+  transform: translateY(-5px);
   z-index: 1;
 }
 
-/* ── Trait top animé ─────────────────────────────────── */
-.svc-card::before {
-  content: '';
-  position: absolute; top: 0; left: 0; right: 0; height: 2px;
-  background: linear-gradient(90deg, var(--cyan), var(--blue));
-  transform: scaleX(0); transform-origin: left;
-  transition: transform .4s cubic-bezier(.4,0,.2,1);
+/* ── Cursor spot ─────────────────────────────────────── */
+.svc-spot {
+  position: absolute;
+  top: 0; left: 0;
+  width: 300px; height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--svc-glow) 0%, transparent 70%);
+  filter: blur(20px);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .3s;
+  will-change: transform;
 }
-.svc-card:hover::before { transform: scaleX(1); }
+.svc-card:hover .svc-spot { opacity: 1; }
+
+/* ── Bordures animées ────────────────────────────────── */
+.svc-border-top,
+.svc-border-right,
+.svc-border-bottom,
+.svc-border-left {
+  position: absolute;
+  background: var(--svc-color);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .2s;
+}
+
+.svc-border-top    { top: 0;    left: 0;  right: 0;  height: 1.5px; transform: scaleX(0); transform-origin: left;   transition: transform .4s cubic-bezier(.4,0,.2,1), opacity .2s; }
+.svc-border-right  { top: 0;    right: 0; bottom: 0; width:  1.5px; transform: scaleY(0); transform-origin: top;    transition: transform .4s .1s cubic-bezier(.4,0,.2,1), opacity .2s .1s; }
+.svc-border-bottom { bottom: 0; left: 0;  right: 0;  height: 1.5px; transform: scaleX(0); transform-origin: right;  transition: transform .4s .2s cubic-bezier(.4,0,.2,1), opacity .2s .2s; }
+.svc-border-left   { top: 0;    left: 0;  bottom: 0; width:  1.5px; transform: scaleY(0); transform-origin: bottom; transition: transform .4s .3s cubic-bezier(.4,0,.2,1), opacity .2s .3s; }
+
+.svc-card:hover .svc-border-top,
+.svc-card:hover .svc-border-right,
+.svc-card:hover .svc-border-bottom,
+.svc-card:hover .svc-border-left {
+  opacity: .7;
+  transform: scale(1);
+}
+
+/* ── Watermark numéro ────────────────────────────────── */
+.svc-watermark {
+  position: absolute;
+  bottom: -10px; right: 16px;
+  font-family: var(--ff-ui);
+  font-weight: 900;
+  font-size: 96px;
+  line-height: 1;
+  color: var(--svc-color);
+  opacity: .04;
+  letter-spacing: -4px;
+  pointer-events: none;
+  user-select: none;
+  transition: opacity .35s;
+}
+.svc-card:hover .svc-watermark { opacity: .09; }
 
 /* ── Num + icône ─────────────────────────────────────── */
 .svc-card-top {
@@ -43,71 +94,96 @@
 
 .svc-num {
   font-family: var(--ff-ui); font-size: 11px; font-weight: 700;
-  letter-spacing: 3px; color: var(--cyan); opacity: .45;
+  letter-spacing: 3px; color: var(--svc-color); opacity: .5;
+}
+
+.svc-icon-wrap {
+  position: relative;
+  width: 44px; height: 44px;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.svc-icon-halo {
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--svc-glow), transparent 70%);
+  opacity: 0;
+  transition: opacity .35s;
+  animation: svc-halo-pulse 3s ease-in-out infinite;
+}
+.svc-card:hover .svc-icon-halo { opacity: 1; }
+
+@keyframes svc-halo-pulse {
+  0%, 100% { transform: scale(1);    opacity: inherit; }
+  50%       { transform: scale(1.25); }
 }
 
 .svc-icon {
-  width: 36px; height: 36px; color: var(--white-dim);
-  transition: color .3s, filter .3s;
+  width: 32px; height: 32px;
+  color: var(--white-dim);
+  position: relative; z-index: 1;
+  transition: color .3s, filter .3s, transform .35s;
 }
 .svc-card:hover .svc-icon {
-  color: var(--cyan);
-  filter: drop-shadow(0 0 8px var(--cyan-glow));
+  color: var(--svc-color);
+  filter: drop-shadow(0 0 8px var(--svc-glow));
+  transform: scale(1.12) rotate(-6deg);
 }
 
 /* ── Titre ───────────────────────────────────────────── */
 .svc-title {
-  font-family: var(--ff-ui); font-weight: 800; font-size: 19px;
+  font-family: var(--ff-ui); font-weight: 800; font-size: 18px;
   text-transform: uppercase; letter-spacing: -.2px;
   color: var(--white); line-height: 1.15;
+  transition: color .3s;
 }
+.svc-card:hover .svc-title { color: var(--svc-color); }
 
-/* ── Contenu hover ───────────────────────────────────── */
-.svc-hover {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  max-height: 0;
-  overflow: hidden;
-  opacity: 0;
-  transform: translateY(8px);
-  transition: max-height .4s cubic-bezier(.4,0,.2,1),
-              opacity .3s .05s,
-              transform .3s .05s;
-}
-
-.svc-card:hover .svc-hover {
-  max-height: 200px;
-  opacity: 1;
-  transform: none;
-}
-
+/* ── Description ─────────────────────────────────────── */
 .svc-desc {
   font-size: 13px; color: var(--white-dim); line-height: 1.75;
+  flex: 1;
 }
 
+/* ── Liste ───────────────────────────────────────────── */
 .svc-list {
   list-style: none;
-  display: flex; flex-direction: column; gap: 6px;
+  display: flex; flex-direction: column; gap: 7px;
 }
 .svc-list li {
   font-family: var(--ff-ui); font-size: 11px; font-weight: 600;
   letter-spacing: 1px; color: var(--white-dim);
   display: flex; align-items: center; gap: 8px;
+  transition: color .25s, transform .25s;
 }
 .svc-list li::before {
   content: ''; width: 4px; height: 4px;
-  background: var(--cyan); border-radius: 50%; flex-shrink: 0;
+  background: var(--svc-color);
+  border-radius: 50%; flex-shrink: 0;
+  box-shadow: 0 0 6px var(--svc-glow);
+  transition: transform .25s;
 }
+.svc-card:hover .svc-list li {
+  color: var(--white);
+}
+.svc-card:hover .svc-list li:nth-child(1) { transform: translateX(4px); transition-delay: .04s; }
+.svc-card:hover .svc-list li:nth-child(2) { transform: translateX(4px); transition-delay: .08s; }
+.svc-card:hover .svc-list li:nth-child(3) { transform: translateX(4px); transition-delay: .12s; }
+.svc-card:hover .svc-list li:nth-child(4) { transform: translateX(4px); transition-delay: .16s; }
 
-/* ── Glow ────────────────────────────────────────────── */
-.svc-glow {
-  position: absolute; bottom: -60px; right: -60px;
-  width: 180px; height: 180px; border-radius: 50%;
-  background: radial-gradient(circle, var(--cyan-dim), transparent 70%);
-  opacity: 0; transition: opacity .4s; pointer-events: none;
+/* ── Barre de progression bas ────────────────────────── */
+.svc-progress {
+  position: absolute;
+  bottom: 0; left: 0;
+  height: 2px;
+  width: 100%;
+  background: linear-gradient(90deg, var(--svc-color), transparent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .5s cubic-bezier(.4,0,.2,1);
 }
-.svc-card:hover .svc-glow { opacity: 1; }
+.svc-card:hover .svc-progress { transform: scaleX(1); }
 
 /* ── Responsive ──────────────────────────────────────── */
 @media (max-width: 1024px) {

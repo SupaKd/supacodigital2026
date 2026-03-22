@@ -1,0 +1,87 @@
+/* ── Conteneur ───────────────────────────────────────── */
+.lbg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+/* ── Blobs qui respirent ─────────────────────────────── */
+.lbg-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(72px);
+  will-change: transform, opacity;
+}
+
+.lbg-blob--1 {
+  width: 420px; height: 420px;
+  background: radial-gradient(circle, rgba(26,107,255,.11), transparent 70%);
+  animation: lbg-pulse-1 9s ease-in-out infinite;
+}
+.lbg-blob--2 {
+  width: 340px; height: 340px;
+  background: radial-gradient(circle, rgba(0,229,255,.09), transparent 70%);
+  animation: lbg-pulse-2 12s ease-in-out infinite;
+}
+.lbg-blob--3 {
+  width: 280px; height: 280px;
+  background: radial-gradient(circle, rgba(139,92,246,.07), transparent 70%);
+  animation: lbg-pulse-3 15s ease-in-out infinite;
+}
+
+/* ── Positions par variant ───────────────────────────── */
+/* variant a — Projects */
+.lbg--a .lbg-blob--1 { top: -10%;  left: -5%; }
+.lbg--a .lbg-blob--2 { bottom: 0%; right: 5%; }
+.lbg--a .lbg-blob--3 { top: 40%;  left: 55%; }
+
+/* variant b — Testimonials */
+.lbg--b .lbg-blob--1 { top: 10%;   right: -5%; }
+.lbg--b .lbg-blob--2 { bottom: 5%; left: 10%; }
+.lbg--b .lbg-blob--3 { top: 50%;  right: 40%; }
+
+/* variant c — Process */
+.lbg--c .lbg-blob--1 { top: -5%;  left: 30%; }
+.lbg--c .lbg-blob--2 { bottom: -5%; right: 20%; }
+.lbg--c .lbg-blob--3 { top: 30%;  left: -5%; }
+
+/* variant d — Zone */
+.lbg--d .lbg-blob--1 { top: 20%;  left: 50%; transform: translateX(-50%); }
+.lbg--d .lbg-blob--2 { top: -5%;  left: 5%; }
+.lbg--d .lbg-blob--3 { bottom: 0%; right: 5%; }
+
+/* ── Animations pulse ────────────────────────────────── */
+@keyframes lbg-pulse-1 {
+  0%, 100% { transform: scale(1);    opacity: 1; }
+  50%       { transform: scale(1.18); opacity: .7; }
+}
+@keyframes lbg-pulse-2 {
+  0%, 100% { transform: scale(1);    opacity: .85; }
+  40%       { transform: scale(1.22); opacity: 1; }
+  70%       { transform: scale(.88); opacity: .65; }
+}
+@keyframes lbg-pulse-3 {
+  0%, 100% { transform: scale(1) translate(0,0);      opacity: .8; }
+  33%       { transform: scale(1.15) translate(20px,-15px); opacity: 1; }
+  66%       { transform: scale(.9) translate(-15px,20px);  opacity: .6; }
+}
+
+/* ── Cursor glow ─────────────────────────────────────── */
+.lbg-cursor {
+  position: absolute;
+  top: 0; left: 0;
+  width: 400px; height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(26,107,255,.13) 0%, rgba(0,229,255,.07) 40%, transparent 70%);
+  filter: blur(40px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .4s ease, transform .08s linear;
+  will-change: transform, opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lbg-blob { animation: none; }
+}

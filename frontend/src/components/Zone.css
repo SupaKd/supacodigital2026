@@ -12,6 +12,8 @@
   align-items: center;
   text-align: center;
   gap: 48px;
+  position: relative;
+  z-index: 1;
 }
 
 .zone .section-title { color: var(--zone-text); }

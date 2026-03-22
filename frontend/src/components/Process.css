@@ -6,11 +6,11 @@
   --proc-border:   rgba(15,15,22,.14);
   --proc-card:     rgba(255,255,255,.7);
 }
-.process .section-label { color: var(--proc-text-dim); }
-.process .section-title { color: var(--proc-text); }
+.process .section-label { color: var(--proc-text-dim); position: relative; z-index: 1; }
+.process .section-title { color: var(--proc-text); position: relative; z-index: 1; }
 .process-steps {
   display: grid; grid-template-columns: repeat(4,1fr);
-  gap: 0; margin-top: 60px; position: relative;
+  gap: 0; margin-top: 60px; position: relative; z-index: 1;
 }
 .process-steps::before {
   content:''; position:absolute; top:38px; left:12%; right:12%; height:1px;

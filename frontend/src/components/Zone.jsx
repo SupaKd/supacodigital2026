@@ -1,3 +1,5 @@
+import LightBg from './LightBg'
+
 const cities = [
   { name: 'Saint-Genis-Pouilly', main: true },
   { name: 'Gex' },
@@ -20,6 +22,7 @@ const cities = [
 export default function Zone() {
   return (
     <section className="section zone" id="zone">
+      <LightBg variant="d" />
       <div className="zone-inner">
         <div className="zone-header">
           <div className="section-label">Zone d'intervention</div>

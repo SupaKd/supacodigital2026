@@ -9,12 +9,41 @@
   --about-pill-bg:  rgba(15,15,22,.06);
 }
 
+/* ── Grille fine + orbes de fond ─────────────────────── */
+.about::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    linear-gradient(rgba(15,15,22,.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15,15,22,.028) 1px, transparent 1px);
+  background-size: 52px 52px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+}
+
+.about::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 520px 380px at 8% 20%, rgba(26,107,255,.09) 0%, transparent 70%),
+    radial-gradient(ellipse 400px 340px at 92% 75%, rgba(0,229,255,.08) 0%, transparent 70%),
+    radial-gradient(ellipse 300px 260px at 55% 10%, rgba(139,92,246,.06) 0%, transparent 70%);
+}
+
 /* ── Grid 3 colonnes ─────────────────────────────────── */
 .about-inner {
   display: grid;
   grid-template-columns: 220px 1fr 220px;
   gap: 48px;
   align-items: center;
+  position: relative;
+  z-index: 1;
 }
 
 

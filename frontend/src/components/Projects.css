@@ -2,6 +2,7 @@
   background: #f5f2ee;
   position: relative;
   isolation: isolate;
+  overflow: hidden;
   --proj-text:     #0f0f16;
   --proj-text-dim: rgba(15,15,22,.55);
   --proj-border:   rgba(15,15,22,.12);
@@ -20,7 +21,10 @@
 .proj-header {
   display: flex; align-items: flex-end; justify-content: space-between;
   margin-bottom: 64px; flex-wrap: wrap; gap: 20px;
+  position: relative; z-index: 1;
 }
+
+.proj-list, .proj-show-more { position: relative; z-index: 1; }
 
 /* ── Liste ───────────────────────────────────────────── */
 .proj-list {
@@ -126,6 +130,11 @@
   font-family: var(--ff-ui); font-weight: 900; font-size: 96px;
   color: rgba(15,15,22,.06); letter-spacing: -4px;
   text-transform: uppercase; user-select: none;
+}
+
+.proj-logo {
+  width: 70%; height: 70%;
+  object-fit: contain;
 }
 
 .proj-visual-link {

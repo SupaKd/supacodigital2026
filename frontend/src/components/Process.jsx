@@ -1,3 +1,5 @@
+import LightBg from './LightBg'
+
 const steps = [
   { num: '01', title: 'Découverte', desc: 'Appel de 30 min pour comprendre vos objectifs, votre cible et votre vision.' },
   { num: '02', title: 'Conception', desc: 'Maquettes et prototype validés avec vous avant de coder une seule ligne.' },
@@ -8,6 +10,7 @@ const steps = [
 export default function Process() {
   return (
     <section className="section process" id="processus">
+      <LightBg variant="c" />
       <div className="section-label">Méthode</div>
       <h2 className="section-title">Mon <em>processus</em></h2>
       <div className="process-steps">
