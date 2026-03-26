@@ -1,0 +1,15 @@
+/* Styles partagés — importés par App.jsx via index.css ou ici */
+@import './components/shared.css';
+@import './components/Navbar.css';
+@import './components/Hero.css';
+@import './components/About.css';
+@import './components/Services.css';
+@import './components/Projects.css';
+@import './components/Testimonials.css';
+@import './components/Zone.css';
+@import './components/Contact.css';
+@import './components/ContactForm.css';
+@import './components/Footer.css';
+@import './components/LegalModal.css';
+@import './components/Chatbot.css';
+@import './components/ScrollToTop.css';

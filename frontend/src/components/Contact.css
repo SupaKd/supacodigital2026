@@ -1,0 +1,37 @@
+.contact { background: var(--black); position: relative; overflow: hidden; }
+.contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: stretch; }
+.contact-info { padding-top: 16px; }
+.contact-desc { font-size: 16px; color: var(--white-dim); line-height: 1.8; margin: 22px 0 36px; max-width: 400px; }
+.contact-items { display: flex; flex-direction: column; gap: 20px; margin-bottom: 36px; }
+.contact-item { display: flex; align-items: center; gap: 14px; }
+.contact-item--link { text-decoration: none; }
+.contact-item-icon {
+  width: 42px; height: 42px; flex-shrink: 0;
+  border: 1px solid var(--border); background: var(--cyan-faint);
+  display: flex; align-items: center; justify-content: center; color: var(--cyan);
+}
+.contact-item-icon svg { width:18px; height:18px; }
+.contact-item-label {
+  font-family: var(--ff-ui); font-size: 10px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase; color: var(--white-dim); margin-bottom: 2px;
+}
+.contact-item-value { font-family: var(--ff-ui); font-size: 14px; font-weight: 600; color: var(--white); }
+.contact-calendly {
+  border: 1px solid var(--border); background: var(--cyan-faint);
+  padding: 18px 22px; display: flex; align-items: center; gap: 14px;
+  cursor: pointer; text-decoration: none; color: var(--white);
+  transition: border-color .2s, background .2s;
+}
+.contact-calendly:hover { border-color: var(--cyan); background: var(--cyan-dim); }
+.contact-cal-icon { color: var(--cyan); flex-shrink: 0; }
+.contact-cal-icon svg { width:24px; height:24px; }
+.contact-cal-title {
+  font-family: var(--ff-ui); font-weight: 700; font-size: 14px;
+  letter-spacing: 1px; text-transform: uppercase; color: var(--white); margin-bottom: 2px;
+}
+.contact-cal-sub { font-size: 12px; color: var(--white-dim); }
+.contact-cal-text { flex: 1; }
+
+@media (max-width: 1024px) {
+  .contact-inner { grid-template-columns: 1fr; gap: 44px; }
+}

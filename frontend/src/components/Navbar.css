@@ -1,0 +1,222 @@
+/* ── Pill wrapper (fixed, centered) ─────────────────── */
+.nav-wrap {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  width: min(860px, calc(100vw - 40px));
+  transition: top 0.3s;
+}
+.nav-wrap.scrolled {
+  top: 12px;
+}
+
+/* ── The pill itself ─────────────────────────────────── */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 18px 12px 22px;
+  background: rgba(5, 6, 15, 0.72);
+  backdrop-filter: blur(24px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(0, 229, 255, 0.04);
+  transition: background 0.3s, box-shadow 0.3s;
+}
+.nav-wrap.scrolled .nav {
+  background: rgba(5, 6, 15, 0.88);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(0, 229, 255, 0.06);
+}
+
+/* ── Logo ──────────────────────────────────────────── */
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+.nav-logo img {
+  height: 30px;
+  width: auto;
+}
+.nav-logo-text {
+  font-family: var(--ff-ui);
+  font-weight: 800;
+  font-size: 15px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--white);
+}
+.nav-logo-text span {
+  color: var(--cyan);
+}
+
+/* ── Links ─────────────────────────────────────────── */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  list-style: none;
+}
+.nav-links a {
+  font-family: var(--ff-ui);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--white);
+  text-decoration: none;
+  position: relative;
+  transition: color 0.2s;
+}
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--cyan);
+  transition: width 0.3s;
+}
+.nav-links a:hover {
+  color: var(--cyan);
+}
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* ── CTA button ────────────────────────────────────── */
+.nav-cta {
+  font-family: var(--ff-ui);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: var(--black);
+  background: var(--accent-gradient);
+  border: none;
+  padding: 9px 20px;
+  cursor: pointer;
+  text-decoration: none;
+  border-radius: 999px;
+  transition: opacity 0.2s, box-shadow 0.2s;
+  white-space: nowrap;
+}
+.nav-cta:hover {
+  opacity: 0.85;
+  box-shadow: 0 0 20px var(--cyan-glow);
+}
+
+/* ── Burger ────────────────────────────────────────── */
+.nav-burger {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--white);
+  cursor: pointer;
+  padding: 6px;
+  min-width: 40px;
+  min-height: 40px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background 0.2s;
+}
+.nav-burger:hover {
+  background: rgba(255, 255, 255, 0.07);
+}
+.nav-burger svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* ── Focus ─────────────────────────────────────────── */
+.nav-links a:focus-visible,
+.nav-cta:focus-visible,
+.nav-burger:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 3px;
+}
+
+/* ── Menu mobile ─────────────────────────────────────── */
+.nav-mobile {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  right: 0;
+  background: rgba(5, 6, 15, 0.96);
+  backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 20px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  animation: mobile-in 0.2s ease;
+  z-index: 99;
+}
+@keyframes mobile-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.nav-mobile ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: 16px;
+}
+.nav-mobile a {
+  font-family: var(--ff-ui);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--white);
+  text-decoration: none;
+  padding: 10px 0;
+  display: block;
+  border-bottom: 1px solid var(--border-soft);
+  transition: color 0.2s;
+}
+.nav-mobile a:hover,
+.nav-mobile a:focus-visible {
+  color: var(--cyan);
+}
+.nav-mobile .nav-cta {
+  width: 100%;
+  margin-top: 8px;
+  text-align: center;
+  white-space: normal;
+  box-sizing: border-box;
+  color: var(--white);
+}
+
+/* ── Responsive ────────────────────────────────────── */
+@media (max-width: 768px) {
+  .nav-wrap {
+    top: 14px;
+  }
+  .nav-wrap.scrolled {
+    top: 8px;
+  }
+  .nav {
+    padding: 10px 14px 10px 18px;
+  }
+  .nav-links,
+  .nav-cta {
+    display: none;
+  }
+  .nav-burger {
+    display: flex;
+  }
+}

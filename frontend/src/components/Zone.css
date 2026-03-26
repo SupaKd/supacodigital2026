@@ -1,0 +1,70 @@
+.zone {
+  background: #f5f2ee;
+  isolation: isolate;
+  --zone-text: #0f0f16;
+  --zone-text-dim: rgba(15,15,22,.55);
+  --zone-border: rgba(15,15,22,.12);
+}
+
+.zone-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 48px;
+  position: relative;
+  z-index: 1;
+}
+
+.zone .section-title { color: var(--zone-text); }
+
+.zone-desc {
+  font-size: 15px;
+  color: var(--zone-text-dim);
+  line-height: 1.8;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.zone-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  list-style: none;
+  max-width: 700px;
+}
+
+.zone-pill {
+  font-family: var(--ff-ui);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 8px 18px;
+  border: 1px solid var(--zone-border);
+  color: var(--zone-text-dim);
+  background: rgba(255,255,255,.6);
+  transition: border-color .2s, color .2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.zone-pill:hover {
+  border-color: var(--blue);
+  color: var(--blue);
+}
+
+.zone-pill--main {
+  border-color: var(--blue);
+  color: var(--blue);
+  background: rgba(26,107,255,.06);
+  font-size: 12px;
+}
+
+.zone-pin { font-size: 13px; }
+
+@media (max-width: 768px) {
+  .zone-inner { gap: 32px; }
+}
