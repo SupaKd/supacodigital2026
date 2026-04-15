@@ -31,6 +31,47 @@
 }
 .contact-cal-sub { font-size: 12px; color: var(--white-dim); }
 .contact-cal-text { flex: 1; }
+.contact-calendly[type="button"], .contact-calendly { width: 100%; text-align: left; }
+
+/* ── Calendly Modale ─────────────────────────────── */
+.calendly-overlay {
+  position: fixed; inset: 0; z-index: 10000;
+  background: rgba(5,6,15,.85);
+  backdrop-filter: blur(6px);
+  display: flex; align-items: center; justify-content: center;
+  animation: cal-fade-in .2s ease;
+}
+@keyframes cal-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.calendly-modal {
+  position: relative;
+  width: min(780px, 95vw);
+  height: min(700px, 90vh);
+  background: #fff;
+  border: 1px solid var(--border);
+  box-shadow: 0 32px 80px rgba(0,0,0,.8);
+  animation: cal-slide-in .25s ease;
+  overflow: hidden;
+}
+@keyframes cal-slide-in {
+  from { opacity: 0; transform: translateY(20px) scale(.97); }
+  to { opacity: 1; transform: none; }
+}
+.calendly-modal iframe {
+  width: 100%; height: 100%; border: none; display: block;
+}
+.calendly-close {
+  position: absolute; top: 12px; right: 12px; z-index: 10;
+  width: 34px; height: 34px;
+  background: var(--black-card); border: 1px solid var(--border);
+  color: var(--white); cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background .2s;
+}
+.calendly-close:hover { background: var(--black-soft); }
+.calendly-close svg { width: 16px; height: 16px; }
 
 @media (max-width: 1024px) {
   .contact-inner { grid-template-columns: 1fr; gap: 44px; }

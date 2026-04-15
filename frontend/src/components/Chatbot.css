@@ -174,7 +174,7 @@
   border-radius: 50%;
   box-shadow: 0 0 6px var(--cyan);
 }
-.chat-close {
+.chat-close, .chat-clear {
   background: none;
   border: none;
   color: var(--white-dim);
@@ -183,12 +183,12 @@
   transition: color 0.2s;
   line-height: 1;
 }
-.chat-close:hover {
+.chat-close:hover, .chat-clear:hover {
   color: var(--white);
 }
-.chat-close svg {
-  width: 18px;
-  height: 18px;
+.chat-close svg, .chat-clear svg {
+  width: 16px;
+  height: 16px;
 }
 .chat-messages {
   flex: 1;

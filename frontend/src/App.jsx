@@ -12,9 +12,11 @@ import Contact from './components/Contact'
 import Footer from './components/Footer'
 import Chatbot from './components/Chatbot'
 import ScrollToTop from './components/ScrollToTop'
+import CalendlyModal from './components/CalendlyModal'
 
 export default function App() {
   const [loaded, setLoaded] = useState(false)
+  const [calendlyOpen, setCalendlyOpen] = useState(false)
   const navLogoRef = useRef(null)
 
   return (
@@ -25,9 +27,10 @@ export default function App() {
           navLogoRef={navLogoRef}
         />
       )}
-      <Navbar navLogoRef={navLogoRef} />
+      {calendlyOpen && <CalendlyModal onClose={() => setCalendlyOpen(false)} />}
+      <Navbar navLogoRef={navLogoRef} onOpenCalendly={() => setCalendlyOpen(true)} />
       <main>
-        <Hero />
+        <Hero onOpenCalendly={() => setCalendlyOpen(true)} />
         <div className="divider divider--dark" />
         <About />
         <div className="divider divider--light" />
@@ -39,7 +42,7 @@ export default function App() {
         <div className="divider" />
         <Zone />
         <div className="divider" />
-        <Contact />
+        <Contact onOpenCalendly={() => setCalendlyOpen(true)} />
       </main>
       <Footer />
       <Chatbot />

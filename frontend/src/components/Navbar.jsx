@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Icon } from '../icons'
-import { CALENDLY_URL } from '../config'
 
-export default function Navbar({ navLogoRef }) {
+export default function Navbar({ navLogoRef, onOpenCalendly }) {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
 
@@ -30,9 +29,9 @@ export default function Navbar({ navLogoRef }) {
         ))}
       </ul>
 
-      <a href={CALENDLY_URL} target="_blank" rel="noreferrer" className="nav-cta">
+      <button onClick={onOpenCalendly} className="nav-cta">
         Réserver un appel
-      </a>
+      </button>
 
       <button
         className="nav-burger"
@@ -58,9 +57,9 @@ export default function Navbar({ navLogoRef }) {
               </li>
             ))}
           </ul>
-          <a href={CALENDLY_URL} target="_blank" rel="noreferrer" className="nav-cta" onClick={closeMenu}>
+          <button className="nav-cta" onClick={() => { closeMenu(); onOpenCalendly(); }}>
             Réserver un appel
-          </a>
+          </button>
         </div>
       )}
     </nav>

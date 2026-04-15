@@ -1,9 +1,8 @@
 import { Icon } from "../icons";
-import { CALENDLY_URL } from "../config";
 import ContactForm from "./ContactForm";
 import MeshBg from "./MeshBg";
 
-export default function Contact() {
+export default function Contact({ onOpenCalendly }) {
   return (
     <section className="section contact" id="contact">
       <MeshBg />
@@ -56,10 +55,8 @@ export default function Contact() {
               </div>
             </a>
           </div>
-          <a
-            href={CALENDLY_URL}
-            target="_blank"
-            rel="noreferrer"
+          <button
+            onClick={onOpenCalendly}
             className="contact-calendly"
           >
             <div className="contact-cal-icon">
@@ -72,7 +69,7 @@ export default function Contact() {
               </div>
             </div>
             <Icon.Arrow />
-          </a>
+          </button>
         </div>
         <ContactForm />
       </div>

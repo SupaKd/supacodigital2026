@@ -2,11 +2,33 @@ import { useState, useEffect, useRef } from 'react'
 import { Icon } from '../icons'
 import { API } from '../config'
 
+const SESSION_KEY = 'digi_conversation'
+const INITIAL_MESSAGE = { role: 'assistant', content: 'Bonjour ! Je suis Digi 👋 l\'assistant de Supaco Digital. Quel est votre projet ?' }
+
+function loadHistory() {
+  try {
+    const stored = sessionStorage.getItem(SESSION_KEY)
+    if (stored) {
+      const parsed = JSON.parse(stored)
+      if (Array.isArray(parsed) && parsed.length > 0) return parsed
+    }
+  } catch {
+    // sessionStorage indisponible ou données corrompues
+  }
+  return [INITIAL_MESSAGE]
+}
+
+function saveHistory(messages) {
+  try {
+    sessionStorage.setItem(SESSION_KEY, JSON.stringify(messages))
+  } catch {
+    // ignore
+  }
+}
+
 export default function Chatbot() {
   const [open, setOpen] = useState(false)
-  const [messages, setMessages] = useState([
-    { role: 'assistant', content: 'Bonjour ! Je suis Digi 👋 l\'assistant de Supaco Digital. Quel est votre projet ?' }
-  ])
+  const [messages, setMessages] = useState(loadHistory)
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
   const [showBadge, setShowBadge] = useState(false)
@@ -20,6 +42,10 @@ export default function Chatbot() {
   useEffect(() => {
     msgsEnd.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages, loading])
+
+  useEffect(() => {
+    saveHistory(messages)
+  }, [messages])
 
   useEffect(() => {
     const about = document.getElementById('services')
@@ -38,6 +64,13 @@ export default function Chatbot() {
     observer.observe(about)
     return () => observer.disconnect()
   }, [])
+
+  const clearHistory = () => {
+    const fresh = [INITIAL_MESSAGE]
+    setMessages(fresh)
+    saveHistory(fresh)
+    setQuickReplies(['Offre Starter', 'Offre Pro', 'E-Commerce', 'Application Web'])
+  }
 
   const send = async (text) => {
     const content = (text || input).trim()
@@ -73,6 +106,16 @@ export default function Chatbot() {
               <div className="chat-name">Digi — Assistant IA</div>
               <div className="chat-status">En ligne</div>
             </div>
+            {messages.length > 1 && (
+              <button
+                className="chat-clear"
+                onClick={clearHistory}
+                aria-label="Effacer la conversation"
+                title="Effacer la conversation"
+              >
+                <Icon.Refresh />
+              </button>
+            )}
             <button
               className="chat-close"
               onClick={() => setOpen(false)}

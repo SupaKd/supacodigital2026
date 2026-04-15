@@ -1,8 +1,7 @@
 import { Icon } from "../icons";
-import { CALENDLY_URL } from "../config";
 import MeshBg from "./MeshBg";
 
-export default function Hero() {
+export default function Hero({ onOpenCalendly }) {
   return (
     <section className="hero" id="accueil">
       <div className="hero-bg">
@@ -43,15 +42,10 @@ export default function Hero() {
             <span>Démarrer mon projet</span>
             <Icon.Arrow />
           </a>
-          <a
-            href={CALENDLY_URL}
-            target="_blank"
-            rel="noreferrer"
-            className="btn-ghost"
-          >
+          <button onClick={onOpenCalendly} className="btn-ghost">
             <span>Appel gratuit 30 min</span>
             <Icon.Arrow />
-          </a>
+          </button>
         </div>
       </div>
       <div className="hero-scroll">

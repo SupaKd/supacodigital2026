@@ -5,6 +5,16 @@ import LightBg from "./LightBg";
 const projects = [
   {
     num: "01",
+    name: "Kekosan",
+    tags: ["Application Web", "React", "Node.js"],
+    placeholder: "KK",
+    logo: "/logo/logokekosan.png",
+    desc: "Application web pour un restaurant. Commandes en ligne, gestion des menus et interface d'administration sur mesure.",
+    url: "https://www.kekosan.com/",
+    year: "2026",
+  },
+  {
+    num: "02",
     name: "Sabai Thoiry",
     tags: ["Application Web", "React", "Node.js", "MySQL"],
     placeholder: "ST",
@@ -14,7 +24,7 @@ const projects = [
     year: "2026",
   },
   {
-    num: "02",
+    num: "03",
     name: "MB Patrimoine",
     tags: ["Site Vitrine", "React"],
     placeholder: "MB",
@@ -24,7 +34,7 @@ const projects = [
     year: "2026",
   },
   {
-    num: "03",
+    num: "04",
     name: "Bellifood",
     tags: ["Site Vitrine", "React"],
     placeholder: "BF",
@@ -34,7 +44,7 @@ const projects = [
     year: "2025",
   },
   {
-    num: "04",
+    num: "05",
     name: "Dépannage Gémeaux",
     tags: ["Site Vitrine", "React"],
     placeholder: "DG",
@@ -44,7 +54,7 @@ const projects = [
     year: "2025",
   },
   {
-    num: "05",
+    num: "06",
     name: "Yojeme",
     tags: ["Site Vitrine", "React"],
     placeholder: "YJ",
@@ -54,7 +64,7 @@ const projects = [
     year: "2025",
   },
   {
-    num: "06",
+    num: "07",
     name: "Photographe",
     tags: ["Portfolio", "React"],
     placeholder: "PH",
@@ -63,7 +73,7 @@ const projects = [
     year: "2025",
   },
   {
-    num: "07",
+    num: "08",
     name: "Restaurant Lyon",
     tags: ["Site Vitrine", "React"],
     placeholder: "RL",
@@ -131,7 +141,7 @@ export default function Projects() {
                   {/* Visuel */}
                   <div className="proj-visual">
                     {p.logo ? (
-                      <img src={p.logo} alt={p.name} className="proj-logo" />
+                      <img src={p.logo} alt={p.name} className="proj-logo" loading="lazy" decoding="async" />
                     ) : (
                       <div className="proj-placeholder">{p.placeholder}</div>
                     )}
