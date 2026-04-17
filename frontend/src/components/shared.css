@@ -31,13 +31,14 @@
 
 /* ── Buttons ─────────────────────────────────────────── */
 .btn-primary {
-  display: inline-flex; align-items: center; gap: 10px;
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
   font-family: var(--ff-ui); font-weight: 700; font-size: 13px;
   letter-spacing: 2px; text-transform: uppercase;
   color: var(--black); background: linear-gradient(135deg,var(--cyan),var(--blue));
-  border: none; padding: 16px 34px; cursor: pointer; text-decoration: none;
+  border: none; padding: 16px 34px; min-height: 52px; cursor: pointer; text-decoration: none;
   clip-path: polygon(12px 0%,100% 0%,calc(100% - 12px) 100%,0% 100%);
   transition: box-shadow .3s, transform .2s; position: relative; overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
 }
 .btn-primary::before {
   content:''; position:absolute; inset:0;
@@ -48,17 +49,37 @@
   box-shadow: 0 0 40px var(--cyan-glow), 0 0 80px rgba(0,229,255,.15);
   transform: translateY(-2px);
 }
+.btn-primary:active { transform: scale(.97); }
+
 .btn-ghost {
-  display: inline-flex; align-items: center; gap: 10px;
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
   font-family: var(--ff-ui); font-weight: 600; font-size: 13px;
   letter-spacing: 2px; text-transform: uppercase;
   color: var(--white); background: transparent;
-  border: 1px solid var(--border); padding: 15px 30px; cursor: pointer; text-decoration: none;
+  border: 1px solid var(--border); padding: 15px 30px; min-height: 52px; cursor: pointer; text-decoration: none;
   clip-path: polygon(12px 0%,100% 0%,calc(100% - 12px) 100%,0% 100%);
   transition: border-color .2s, color .2s, box-shadow .2s;
+  -webkit-tap-highlight-color: transparent;
 }
 .btn-ghost:hover { border-color:var(--cyan); color:var(--cyan); box-shadow:0 0 20px var(--cyan-dim); }
+.btn-ghost:active { transform: scale(.97); }
 
 @media (max-width: 1024px) {
   .section { padding: 80px 28px; }
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding: 64px 20px;
+    padding-left: max(20px, env(safe-area-inset-left));
+    padding-right: max(20px, env(safe-area-inset-right));
+  }
+  .section-title { font-size: clamp(32px, 9vw, 52px); letter-spacing: -.5px; }
+  .btn-primary,
+  .btn-ghost {
+    width: 100%;
+    font-size: 14px;
+    letter-spacing: 1.5px;
+    min-height: 54px;
+  }
 }

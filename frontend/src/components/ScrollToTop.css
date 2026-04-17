@@ -28,3 +28,17 @@
 @media (max-width: 1024px) {
   .scroll-top { right: 22px; bottom: 88px; }
 }
+
+@media (max-width: 768px) {
+  .scroll-top {
+    right: max(20px, env(safe-area-inset-right));
+    /* Positionné au-dessus du chat-trigger (56px + 24px gap) */
+    bottom: max(92px, calc(env(safe-area-inset-bottom) + 88px));
+    width: 44px;
+    height: 44px;
+    clip-path: none;
+    border-radius: 12px;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .scroll-top:active { transform: scale(.92); }
+}

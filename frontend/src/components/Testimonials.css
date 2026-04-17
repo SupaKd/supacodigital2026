@@ -18,6 +18,7 @@
   gap: 16px;
   width: max-content;
   animation: scroll-left 36s linear infinite;
+  touch-action: pan-x;
 }
 .testi-track:hover { animation-play-state: paused; }
 @keyframes scroll-left {
@@ -107,7 +108,37 @@
 }
 
 @media (max-width: 768px) {
+  .testi-track-wrap {
+    margin-top: 36px;
+    /* Masque plus discret sur mobile */
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 4%, #000 96%, transparent 100%);
+    mask-image: linear-gradient(90deg, transparent 0%, #000 4%, #000 96%, transparent 100%);
+  }
   .testi-card { width: 260px; padding: 16px; }
   .testimonials .section-label { justify-content: center; }
   .testimonials .section-title { text-align: center; }
+}
+
+@media (max-width: 640px) {
+  /* Sur mobile, pause auto de l'animation — l'utilisateur swipe manuellement */
+  .testi-track {
+    animation-play-state: paused;
+    width: auto;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    animation: none;
+  }
+  .testi-track::-webkit-scrollbar { display: none; }
+  .testi-track-wrap {
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 3%, #000 97%, transparent 100%);
+    mask-image: linear-gradient(90deg, transparent 0%, #000 3%, #000 97%, transparent 100%);
+    overflow: hidden;
+  }
+  .testi-card {
+    scroll-snap-align: start;
+    flex-shrink: 0;
+    width: calc(100vw - 60px);
+  }
 }

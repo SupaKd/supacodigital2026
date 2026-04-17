@@ -156,5 +156,36 @@
 
 @media (max-width: 640px) {
   .form-row { grid-template-columns: 1fr; }
-  .contact-form-wrap { padding: 30px 22px; }
+  .contact-form-wrap { padding: 28px 20px; border-radius: 16px; }
+  .form-title { font-size: 18px; margin-bottom: 20px; }
+  .form-field input,
+  .form-field select,
+  .form-field textarea {
+    padding: 14px 16px;
+    font-size: 16px; /* Empêche le zoom auto iOS */
+    min-height: 52px;
+    border-radius: 10px;
+  }
+  .form-field textarea { min-height: 120px; }
+  .form-field label { font-size: 10px; }
+  /* Checkbox app-mobile : zone de tap élargie */
+  .form-consent {
+    align-items: center;
+    gap: 14px;
+  }
+  .form-consent input[type="checkbox"] {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+    cursor: pointer;
+  }
+  .form-consent label { font-size: 12px; }
+  .form-submit {
+    padding: 18px;
+    min-height: 56px;
+    font-size: 14px;
+    border-radius: 10px;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .form-submit:active { transform: scale(.98); }
 }

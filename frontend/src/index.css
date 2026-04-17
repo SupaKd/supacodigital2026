@@ -22,10 +22,13 @@
   --ff-body:    'Barlow', sans-serif;
 }
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  /* iOS safe-area support */
+  -webkit-text-size-adjust: 100%;
+}
 
 body {
-  /* Gradient vertical global : noir froid en haut → bleuté profond en bas */
   background:
     linear-gradient(
       180deg,
@@ -42,6 +45,8 @@ body {
   line-height: 1.6;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  /* Supprime le délai 300ms sur les taps (mobile) */
+  touch-action: manipulation;
 }
 
 /* ── Grain global ────────────────────────────────────── */
@@ -63,6 +68,16 @@ body::after {
   body {
     background: #060a18;
     background-attachment: scroll;
+  }
+  /* Désactive le grain sur mobile (perf GPU) */
+  body::after {
+    display: none;
+  }
+  /* Empêche le zoom iOS sur tous les champs de saisie */
+  input,
+  select,
+  textarea {
+    font-size: 16px !important;
   }
 }
 

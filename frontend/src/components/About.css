@@ -237,9 +237,27 @@
   .about-main { text-align: center; }
   .about-main .section-label { justify-content: center; }
   .about-bio { text-align: left; }
-  .about-aside {
-    text-align: center;
-  }
+  .about-aside { text-align: center; }
   .about-pills { justify-content: center; }
   .about-socials { align-items: center; }
+}
+
+@media (max-width: 640px) {
+  .about-inner { gap: 28px; }
+  .about-photo-frame { width: 80px; height: 80px; border-width: 2px; }
+  .about-title { font-size: clamp(28px, 8vw, 40px); letter-spacing: -.5px; }
+  .about-bio { font-size: 14px; }
+  .about-pill {
+    padding: 6px 13px;
+    min-height: 36px;
+    font-size: 10px;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .about-social-link {
+    min-height: 44px;
+    padding: 4px 0;
+    font-size: 13px;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .about-sep { margin: 16px 0; }
 }

@@ -76,3 +76,42 @@
 @media (max-width: 1024px) {
   .contact-inner { grid-template-columns: 1fr; gap: 44px; }
 }
+
+@media (max-width: 640px) {
+  .contact-inner { gap: 32px; }
+  .contact-desc { font-size: 14px; max-width: 100%; margin: 16px 0 24px; }
+  .contact-items { gap: 16px; margin-bottom: 24px; }
+  .contact-item-icon {
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+  }
+  .contact-item-value { font-size: 13px; }
+  .contact-calendly {
+    padding: 16px 18px;
+    min-height: 64px;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .contact-calendly:active {
+    border-color: var(--cyan);
+    background: var(--cyan-dim);
+  }
+  /* Modale calendly plein écran sur mobile */
+  .calendly-modal {
+    width: 100vw;
+    height: 100dvh;
+    border-radius: 0;
+    border: none;
+    animation: cal-slide-up .28s cubic-bezier(.4,0,.2,1);
+  }
+  @keyframes cal-slide-up {
+    from { transform: translateY(100%); opacity: 0; }
+    to   { transform: none; opacity: 1; }
+  }
+  .calendly-close {
+    width: 44px;
+    height: 44px;
+    top: max(12px, env(safe-area-inset-top));
+    right: 12px;
+  }
+}

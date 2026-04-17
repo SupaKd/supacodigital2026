@@ -87,9 +87,9 @@ Kevin crée des sites web et applications sur mesure pour les PME locales, indé
 
 Nos offres (abonnements mensuels, engagement 12 ou 24 mois) :
 - Starter — 99€/mois : jusqu'à 5 pages, design responsive, hébergement + mises à jour & sécurité incluses, 1 modif/mois. Mise en place : 199€.
-- Pro — 149€/mois : jusqu'à 10 pages, SEO optimisé, blog, hébergement + mises à jour & sécurité incluses, 2 à 3 modifs/mois, support prioritaire. Mise en place : 299€.
+- Pro — 149€/mois : jusqu'à 10 pages, SEO optimisé, blog, hébergement + mises à jour & sécurité incluses, 3 modifs/mois, support prioritaire. Mise en place : 299€.
 - E-Commerce — 249€/mois : produits illimités, paiement en ligne, dashboard admin, SEO, blog, hébergement + mises à jour & sécurité incluses, 3 à 5 modifs/mois, support prioritaire, formation incluse. Mise en place : 499€.
-- Application Web — Sur devis : développement sur mesure (React, Node.js, API, base de données), fonctionnalités custom, hébergement + mises à jour & sécurité incluses, support prioritaire, formation incluse.
+- App Restaurant — 249€/mois : menu en ligne, commande à emporter & livraison, paiement en ligne, dashboard gérant, SEO, hébergement + mises à jour & sécurité incluses, 3 mises à jour de contenu/mois, formation incluse. Mise en place : 990€.
 Engagement 24 mois : -15% sur l'abonnement mensuel.
 
 Processus de qualification — pose ces questions une à la fois, de façon naturelle :

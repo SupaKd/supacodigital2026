@@ -97,9 +97,9 @@
   display: block;
   font-family: 'Barlow Condensed', sans-serif;
   font-weight: 900;
-  font-size: clamp(36px, 7vw, 58px);
+  font-size: clamp(32px, 9vw, 58px);
   text-transform: uppercase;
-  letter-spacing: 10px;
+  letter-spacing: clamp(4px, 2vw, 10px);
   line-height: 1.05;
   opacity: 0;
   transform: translateY(20px);

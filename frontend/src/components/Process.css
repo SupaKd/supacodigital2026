@@ -39,3 +39,27 @@
   .process-steps { grid-template-columns: 1fr 1fr; gap: 44px; }
   .process-steps::before { display: none; }
 }
+
+@media (max-width: 640px) {
+  .process-steps {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    margin-top: 40px;
+  }
+  .process-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 0;
+    text-align: left;
+  }
+  .process-num {
+    width: 52px;
+    height: 52px;
+    flex-shrink: 0;
+    margin: 0;
+    font-size: 20px;
+  }
+  .process-step-title { font-size: 14px; }
+  .process-step-desc  { font-size: 13px; }
+}

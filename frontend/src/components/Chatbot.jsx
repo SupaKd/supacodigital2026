@@ -1,9 +1,12 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { Icon } from '../icons'
 import { API } from '../config'
 
 const SESSION_KEY = 'digi_conversation'
-const INITIAL_MESSAGE = { role: 'assistant', content: 'Bonjour ! Je suis Digi 👋 l\'assistant de Supaco Digital. Quel est votre projet ?' }
+const INITIAL_MESSAGE = {
+  role: 'assistant',
+  content: 'Bonjour ! Je suis Digi, l\'assistant de Supaco Digital. Vous cherchez un site vitrine, une boutique en ligne ou une app restaurant ? Je peux vous guider vers la bonne offre.'
+}
 
 function loadHistory() {
   try {
@@ -34,10 +37,13 @@ export default function Chatbot() {
   const [showBadge, setShowBadge] = useState(false)
   const [bubble, setBubble] = useState(false)
   const [quickReplies, setQuickReplies] = useState([
-    'Offre Starter', 'Offre Pro', 'E-Commerce', 'Application Web'
+    'Starter — 99€/mois', 'Pro — 149€/mois', 'E-Commerce — 249€/mois', 'App Restaurant — 249€/mois'
   ])
   const msgsEnd = useRef(null)
   const notifiedRef = useRef(false)
+  const panelRef = useRef(null)
+  const dragY = useRef(0)
+  const startY = useRef(0)
 
   useEffect(() => {
     msgsEnd.current?.scrollIntoView({ behavior: 'smooth' })
@@ -65,11 +71,45 @@ export default function Chatbot() {
     return () => observer.disconnect()
   }, [])
 
+  // Swipe-to-close sur mobile
+  const onTouchStart = useCallback(e => {
+    startY.current = e.touches[0].clientY
+    dragY.current = 0
+  }, [])
+
+  const onTouchMove = useCallback(e => {
+    const delta = e.touches[0].clientY - startY.current
+    if (delta < 0) return // ignore swipe vers le haut
+    dragY.current = delta
+    if (panelRef.current) {
+      panelRef.current.style.transform = `translateY(${delta}px)`
+      panelRef.current.style.transition = 'none'
+    }
+  }, [])
+
+  const onTouchEnd = useCallback(() => {
+    if (!panelRef.current) return
+    if (dragY.current > 120) {
+      // seuil dépassé → fermer avec animation slide-down
+      panelRef.current.style.transition = 'transform 0.28s cubic-bezier(.4,0,.2,1)'
+      panelRef.current.style.transform = 'translateY(100%)'
+      setTimeout(() => setOpen(false), 260)
+    } else {
+      // snap back
+      panelRef.current.style.transition = 'transform 0.22s cubic-bezier(.4,0,.2,1)'
+      panelRef.current.style.transform = ''
+      setTimeout(() => {
+        if (panelRef.current) panelRef.current.style.transition = ''
+      }, 220)
+    }
+    dragY.current = 0
+  }, [])
+
   const clearHistory = () => {
     const fresh = [INITIAL_MESSAGE]
     setMessages(fresh)
     saveHistory(fresh)
-    setQuickReplies(['Offre Starter', 'Offre Pro', 'E-Commerce', 'Application Web'])
+    setQuickReplies(['Starter — 99€/mois', 'Pro — 149€/mois', 'E-Commerce — 249€/mois', 'App Restaurant — 249€/mois'])
   }
 
   const send = async (text) => {
@@ -99,8 +139,18 @@ export default function Chatbot() {
   return (
     <>
       {open && (
-        <div className="chat-panel" role="dialog" aria-label="Chat avec Digi, assistant Supaco Digital">
-          <div className="chat-header">
+        <div
+          ref={panelRef}
+          className="chat-panel"
+          role="dialog"
+          aria-label="Chat avec Digi, assistant Supaco Digital"
+        >
+          <div
+            className="chat-header"
+            onTouchStart={onTouchStart}
+            onTouchMove={onTouchMove}
+            onTouchEnd={onTouchEnd}
+          >
             <div className="chat-avatar" aria-hidden="true"><Icon.Bot /></div>
             <div className="chat-header-info">
               <div className="chat-name">Digi — Assistant IA</div>

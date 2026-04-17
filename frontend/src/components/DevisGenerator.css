@@ -485,8 +485,33 @@
   .devis-overlay { padding: 0; align-items: flex-end; }
   .devis-modal {
     border-radius: 20px 20px 0 0;
-    max-height: 95vh;
-    padding: 24px 16px;
+    max-height: 96dvh;
+    padding: 20px 16px;
+    padding-bottom: max(20px, env(safe-area-inset-bottom));
+    animation: devis-slide-up .3s cubic-bezier(.4,0,.2,1);
+  }
+  @keyframes devis-slide-up {
+    from { transform: translateY(100%); opacity: 0; }
+    to   { transform: none; opacity: 1; }
+  }
+  /* Poignée de drag */
+  .devis-modal-header::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 36px;
+    height: 4px;
+    background: rgba(255,255,255,.15);
+    border-radius: 99px;
+  }
+  .devis-modal-header { position: relative; padding-top: 20px; }
+  .devis-modal-close {
+    width: 44px;
+    height: 44px;
+    -webkit-tap-highlight-color: transparent;
   }
   .devis-plans-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
   .devis-step-label { display: none; }

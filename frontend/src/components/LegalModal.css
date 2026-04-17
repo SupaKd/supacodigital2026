@@ -62,6 +62,36 @@
 .legal-body a:hover { text-decoration: underline; }
 
 @media (max-width: 640px) {
-  .legal-modal { max-height: 90vh; border-radius: 16px 16px 0 0; }
   .legal-overlay { align-items: flex-end; padding: 0; }
+  .legal-modal {
+    max-height: 92dvh;
+    border-radius: 20px 20px 0 0;
+    padding-bottom: env(safe-area-inset-bottom);
+    animation: modal-slide-up .28s cubic-bezier(.4,0,.2,1);
+  }
+  @keyframes modal-slide-up {
+    from { transform: translateY(100%); opacity: 0; }
+    to   { transform: none; opacity: 1; }
+  }
+  /* Poignée de drag visuelle */
+  .legal-header::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 36px;
+    height: 4px;
+    background: rgba(15,15,22,.15);
+    border-radius: 99px;
+  }
+  .legal-header { position: relative; padding-top: 26px; }
+  .legal-close {
+    min-width: 44px;
+    min-height: 44px;
+    padding: 8px;
+  }
+  .legal-body { padding: 20px; font-size: 14px; }
+  .legal-title { font-size: 16px; }
 }

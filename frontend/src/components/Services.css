@@ -71,32 +71,44 @@
 .pricing-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 2px;
+  gap: 16px;
   margin-top: 40px;
-  background: var(--border-soft);
+  background: transparent;
+  align-items: stretch;
 }
 
 /* ── Card ────────────────────────────────────────────── */
 .pricing-card {
   background: var(--black-card);
-  padding: 32px 28px 28px;
+  padding: 28px 24px 24px;
   position: relative;
   display: flex;
   flex-direction: column;
   gap: 0;
+  border-radius: 16px;
+  border: 1px solid var(--border-soft);
   --plan-color: var(--cyan);
   --plan-glow: rgba(0,229,255,.15);
-  transition: background .3s;
+  transition: border-color .25s, box-shadow .25s, transform .25s, background .25s;
+  cursor: default;
 }
 .pricing-card:hover {
   background: var(--black-soft);
+  border-color: var(--plan-color);
+  box-shadow: 0 0 32px var(--plan-glow), 0 8px 32px rgba(0,0,0,.35);
+  transform: translateY(-4px);
 }
 
 .pricing-card--popular {
   background: var(--black-soft);
-  outline: 1.5px solid var(--plan-color);
-  outline-offset: -1.5px;
+  border-color: var(--plan-color);
+  box-shadow: 0 0 24px var(--plan-glow), 0 4px 24px rgba(0,0,0,.3);
   z-index: 1;
+  transform: translateY(-6px);
+}
+.pricing-card--popular:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 0 48px var(--plan-glow), 0 12px 40px rgba(0,0,0,.4);
 }
 
 /* ── Badge populaire ─────────────────────────────────── */
@@ -550,95 +562,152 @@
 @media (max-width: 1100px) {
   .pricing-grid {
     grid-template-columns: 1fr 1fr;
+    gap: 14px;
   }
   .pricing-card--popular {
-    outline: none;
-    border-top: 2px solid var(--plan-color);
+    transform: none;
+  }
+  .pricing-card--popular:hover {
+    transform: translateY(-4px);
   }
 }
 
 @media (max-width: 640px) {
+  /* ── Grid → slider horizontal ── */
   .pricing-grid {
     display: flex;
     flex-direction: row;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
-    gap: 0;
-    margin-left: calc(-1 * var(--space-6, 24px));
-    margin-right: calc(-1 * var(--space-6, 24px));
+    touch-action: pan-x;
+    gap: 12px;
+    margin-left: calc(-1 * var(--space-6, 20px));
+    margin-right: calc(-1 * var(--space-6, 20px));
+    padding-left: var(--space-6, 20px);
+    padding-right: var(--space-6, 20px);
+    padding-bottom: 16px;
     scrollbar-width: none;
   }
-  .pricing-grid::-webkit-scrollbar {
-    display: none;
-  }
-  .pricing-card {
-    flex: 0 0 100vw;
-    scroll-snap-align: start;
-  }
-  .pricing-amount { font-size: 44px; }
+  .pricing-grid::-webkit-scrollbar { display: none; }
 
-  /* Swipe hint */
-  .pricing-swipe-hint {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 6px;
-    margin-top: 12px;
-    padding-right: var(--space-6, 24px);
-    color: var(--cyan);
-    font-family: var(--ff-ui);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    opacity: 0.7;
-  }
+  /* ── Card pleine largeur ── */
   .pricing-card {
-    position: relative;
+    flex: 0 0 calc(100vw - 40px);
+    scroll-snap-align: center;
+    border-radius: 20px;
+    border: 1px solid var(--border-soft);
+    padding: 0 0 24px;
+    transform: none !important;
+    overflow: hidden;
   }
+  .pricing-card:hover { transform: none !important; }
+  .pricing-card--popular {
+    border-color: var(--plan-color);
+    box-shadow: 0 0 28px var(--plan-glow);
+  }
+
+  /* ── Barre colorée en haut de card (style app store) ── */
+  .pricing-card::before {
+    content: '';
+    display: block;
+    height: 4px;
+    background: var(--plan-color);
+    box-shadow: 0 0 12px var(--plan-glow);
+    margin-bottom: 0;
+  }
+
+  /* Rembourrage interne sous la barre */
+  .pricing-header {
+    padding: 20px 20px 0;
+    margin-bottom: 16px;
+  }
+  .pricing-sur-mesure,
+  .pricing-no-commission,
+  .pricing-no-commission-resto {
+    margin: 0 20px 16px;
+  }
+  .pricing-divider { margin: 12px 20px; }
+  .pricing-section { padding: 0 20px; }
+  .pricing-cta {
+    margin: 16px 20px 0;
+    width: calc(100% - 40px);
+    min-height: 54px;
+    border-radius: 14px;
+    font-size: 14px;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .pricing-cta:active { transform: scale(.97); }
+
+  /* ── Badge populaire repositionné ── */
   .pricing-badge {
     position: static;
     transform: none;
     left: auto;
     top: auto;
     align-self: flex-start;
-    margin-bottom: 8px;
+    margin: 0 0 10px;
+    display: inline-flex;
   }
+
+  .pricing-amount { font-size: 44px; }
+  .pricing-feature { font-size: 13px; }
+
+  /* ── Flèche swipe ── */
   .pricing-swipe-arrow-fixed {
     display: block;
     position: absolute;
     right: 16px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 22px;
-    color: var(--cyan);
-    animation: swipeHint 1.2s ease-in-out infinite;
+    top: 24px;
+    font-size: 16px;
+    color: var(--plan-color);
+    opacity: 0.6;
+    animation: swipeHint 1.4s ease-in-out infinite;
     pointer-events: none;
     z-index: 2;
   }
   @keyframes swipeHint {
-    0%   { transform: translateY(-50%) translateX(0);   opacity: 0.4; }
-    50%  { transform: translateY(-50%) translateX(6px); opacity: 1;   }
-    100% { transform: translateY(-50%) translateX(0);   opacity: 0.4; }
+    0%   { transform: translateX(0);   opacity: 0.3; }
+    50%  { transform: translateX(5px); opacity: 0.8; }
+    100% { transform: translateX(0);   opacity: 0.3; }
   }
 
-  /* Dots indicator */
+  /* ── Hint bas + dots ── */
+  .pricing-swipe-hint {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 12px;
+    color: var(--white-dim);
+    font-family: var(--ff-ui);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    opacity: 0.5;
+  }
   .pricing-slider-dots {
     display: flex;
     justify-content: center;
     gap: 6px;
-    margin-top: 20px;
+    margin-top: 14px;
   }
   .pricing-slider-dot {
     width: 6px;
     height: 6px;
     border-radius: 99px;
     background: var(--border-soft);
-    transition: width .3s, background .3s;
+    transition: width .3s cubic-bezier(.4,0,.2,1), background .3s;
   }
   .pricing-slider-dot--active {
-    width: 20px;
+    width: 22px;
     background: var(--cyan);
   }
+
+  /* ── FAQ ── */
+  .faq-wrap { margin-top: 48px; }
+  .faq-q { padding: 16px 20px; font-size: 14px; min-height: 56px; }
+  .faq-a { padding: 0 20px 16px; font-size: 13px; }
+  .pricing-commitment { font-size: 10px; }
 }

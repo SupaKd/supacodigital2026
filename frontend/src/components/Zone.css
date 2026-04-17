@@ -68,3 +68,25 @@
 @media (max-width: 768px) {
   .zone-inner { gap: 32px; }
 }
+
+@media (max-width: 640px) {
+  .zone-inner { gap: 24px; }
+  .zone-desc {
+    font-size: 14px;
+    max-width: 100%;
+  }
+  .zone-list {
+    max-width: 100%;
+    gap: 8px;
+  }
+  .zone-pill {
+    padding: 10px 16px;
+    min-height: 44px;
+    font-size: 11px;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .zone-pill:active {
+    border-color: var(--blue);
+    color: var(--blue);
+  }
+}
