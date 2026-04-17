@@ -190,10 +190,9 @@ export default function Chatbot() {
             {loading && (
               <div className="chat-msg bot" aria-label="Digi est en train d'écrire">
                 <div className="chat-msg-av" aria-hidden="true">D</div>
-                <div className="chat-bubble">
-                  <div className="chat-typing" aria-hidden="true">
-                    <span/><span/><span/>
-                  </div>
+                <div className="chat-bubble chat-skeleton" aria-hidden="true">
+                  <div className="chat-skeleton-line chat-skeleton-line--long" />
+                  <div className="chat-skeleton-line chat-skeleton-line--short" />
                 </div>
               </div>
             )}

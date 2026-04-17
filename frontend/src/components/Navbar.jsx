@@ -1,13 +1,24 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import { Icon } from '../icons'
 
 export default function Navbar({ navLogoRef, onOpenCalendly, onOpenDevis }) {
   const [scrolled, setScrolled] = useState(false)
+  const [visible, setVisible] = useState(true)
   const [menuOpen, setMenuOpen] = useState(false)
+  const lastY = useRef(0)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40)
+    const onScroll = () => {
+      const y = window.scrollY
+      setScrolled(y > 40)
+      if (y < 80) {
+        setVisible(true)
+      } else {
+        setVisible(y < lastY.current)
+      }
+      lastY.current = y
+    }
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
@@ -56,7 +67,7 @@ export default function Navbar({ navLogoRef, onOpenCalendly, onOpenDevis }) {
 
   return (
     <>
-      <div className={`nav-wrap${scrolled ? ' scrolled' : ''}`}>
+      <div className={`nav-wrap${scrolled ? ' scrolled' : ''}${!visible ? ' nav-wrap--hidden' : ''}`}>
         <nav className="nav" aria-label="Navigation principale">
           <a href="#accueil" className="nav-logo">
             <img ref={navLogoRef} src="/logo2026.webp" alt="Supaco Digital — retour accueil" />

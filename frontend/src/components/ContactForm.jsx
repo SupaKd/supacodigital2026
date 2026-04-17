@@ -140,14 +140,20 @@ export default function ContactForm() {
             {errMsg}
           </p>
         )}
-        <button
-          className="form-submit"
-          type="submit"
-          disabled={status === 'loading' || !consent}
-          aria-label={status === 'loading' ? 'Envoi en cours, veuillez patienter' : 'Envoyer le message'}
-        >
-          {status === 'loading' ? 'Envoi en cours...' : <><span>Envoyer le message</span><Icon.Arrow /></>}
-        </button>
+        {status === 'loading' ? (
+          <div className="form-submit form-submit--skeleton" aria-label="Envoi en cours, veuillez patienter" aria-busy="true">
+            <div className="form-skeleton-bar" />
+          </div>
+        ) : (
+          <button
+            className="form-submit"
+            type="submit"
+            disabled={!consent}
+            aria-label="Envoyer le message"
+          >
+            <span>Envoyer le message</span><Icon.Arrow />
+          </button>
+        )}
       </form>
 
       {legal && <LegalModal type={legal} onClose={() => setLegal(null)} />}

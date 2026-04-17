@@ -76,6 +76,23 @@
 }
 .form-submit:hover { box-shadow: 0 4px 24px rgba(26,107,255,.35); transform: translateY(-1px); }
 .form-submit:disabled { opacity:.6; cursor:not-allowed; transform:none; }
+.form-submit--skeleton {
+  pointer-events: none;
+  overflow: hidden;
+  cursor: default;
+}
+.form-skeleton-bar {
+  width: 40%;
+  height: 14px;
+  border-radius: 6px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.15) 25%, rgba(255,255,255,0.32) 50%, rgba(255,255,255,0.15) 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.4s ease-in-out infinite;
+}
+@keyframes skeleton-shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
 /* ── Success state ───────────────────────────────────── */
 .form-success-wrap {
   position: relative;

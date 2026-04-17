@@ -602,13 +602,15 @@ export default function DevisGenerator({ initialPlan = null, onClose }) {
 
               <div className="devis-nav">
                 <button className="btn-ghost" onClick={back}>← Retour</button>
-                <button
-                  className="btn-primary"
-                  onClick={generateAndSend}
-                  disabled={status === 'loading'}
-                >
-                  {status === 'loading' ? 'Génération…' : <><span>Télécharger le PDF</span><span>↓</span></>}
-                </button>
+                {status === 'loading' ? (
+                  <div className="btn-primary btn-skeleton" aria-label="Génération en cours" aria-busy="true">
+                    <div className="btn-skeleton-bar" />
+                  </div>
+                ) : (
+                  <button className="btn-primary" onClick={generateAndSend}>
+                    <span>Télécharger le PDF</span><span>↓</span>
+                  </button>
+                )}
               </div>
             </motion.div>
           )}

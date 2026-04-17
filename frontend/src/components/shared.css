@@ -50,6 +50,22 @@
   transform: translateY(-2px);
 }
 .btn-primary:active { transform: scale(.97); }
+.btn-skeleton {
+  pointer-events: none;
+  cursor: default;
+}
+.btn-skeleton-bar {
+  width: 45%;
+  height: 13px;
+  border-radius: 6px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.15) 25%, rgba(255,255,255,0.32) 50%, rgba(255,255,255,0.15) 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.4s ease-in-out infinite;
+}
+@keyframes skeleton-shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
 
 .btn-ghost {
   display: inline-flex; align-items: center; justify-content: center; gap: 10px;

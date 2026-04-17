@@ -6,10 +6,15 @@
   transform: translateX(-50%);
   z-index: 100;
   width: min(860px, calc(100vw - 40px));
-  transition: top 0.3s;
+  transition: top 0.3s, opacity 0.25s ease, translate 0.3s ease;
 }
 .nav-wrap.scrolled {
   top: 12px;
+}
+.nav-wrap--hidden {
+  opacity: 0;
+  translate: 0 -12px;
+  pointer-events: none;
 }
 
 /* ── The pill itself ─────────────────────────────────── */
