@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Icon } from '../icons'
 
-export default function Navbar({ navLogoRef, onOpenCalendly }) {
+export default function Navbar({ navLogoRef, onOpenCalendly, onOpenDevis }) {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
 
@@ -29,8 +29,8 @@ export default function Navbar({ navLogoRef, onOpenCalendly }) {
         ))}
       </ul>
 
-      <button onClick={onOpenCalendly} className="nav-cta">
-        Réserver un appel
+      <button onClick={() => onOpenDevis(null)} className="nav-cta">
+        Créer un devis
       </button>
 
       <button
@@ -57,8 +57,8 @@ export default function Navbar({ navLogoRef, onOpenCalendly }) {
               </li>
             ))}
           </ul>
-          <button className="nav-cta" onClick={() => { closeMenu(); onOpenCalendly(); }}>
-            Réserver un appel
+          <button className="nav-cta" onClick={() => { closeMenu(); onOpenDevis(null) }}>
+            Créer un devis
           </button>
         </div>
       )}

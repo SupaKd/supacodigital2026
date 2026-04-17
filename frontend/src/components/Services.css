@@ -126,10 +126,11 @@
 
 .pricing-name {
   font-family: var(--ff-ui);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 2.5px;
-  color: var(--white-dim);
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: var(--plan-color);
+  text-shadow: 0 0 20px var(--plan-glow);
 }
 
 .pricing-price {
@@ -180,6 +181,37 @@
   border-radius: 6px;
   padding: 4px 10px;
   width: fit-content;
+}
+
+/* ── Savings banner ──────────────────────────────────── */
+.pricing-savings {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--ff-ui);
+  font-size: 12px;
+  font-weight: 600;
+  color: #86efac;
+  background: rgba(34,197,94,.1);
+  border: 1px solid rgba(34,197,94,.25);
+  border-radius: 8px;
+  padding: 7px 12px;
+  animation: savingsFadeIn .35s ease forwards;
+}
+
+.pricing-savings strong {
+  color: #4ade80;
+  font-weight: 800;
+}
+
+.pricing-savings-icon {
+  font-size: 14px;
+  line-height: 1;
+}
+
+@keyframes savingsFadeIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 /* ── Divider ─────────────────────────────────────────── */
@@ -274,6 +306,174 @@
 }
 .pricing-cta:hover .pricing-cta-arrow {
   transform: translate(2px, -2px);
+}
+
+/* ── Sur mesure badge ────────────────────────────────── */
+.pricing-sur-mesure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  background: linear-gradient(135deg, rgba(0,229,255,.1), rgba(0,229,255,.03));
+  border: 1px solid rgba(0,229,255,.3);
+  border-radius: 10px;
+  padding: 10px 14px;
+  margin-bottom: 18px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  animation: surMesurePulse 3.5s ease-in-out infinite;
+}
+
+.pricing-sur-mesure::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(0,229,255,.07), transparent);
+  transform: translateX(-100%);
+  animation: commissionShine 3.5s ease-in-out infinite;
+}
+
+@keyframes surMesurePulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(0,229,255,0); }
+  50%       { box-shadow: 0 0 16px 2px rgba(0,229,255,.15); }
+}
+
+.pricing-sur-mesure-icon {
+  font-size: 16px;
+  color: var(--cyan);
+  line-height: 1;
+  margin-bottom: 2px;
+  animation: starSpin 4s linear infinite;
+}
+
+@keyframes starSpin {
+  0%   { transform: rotate(0deg) scale(1); }
+  50%  { transform: rotate(180deg) scale(1.2); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+.pricing-sur-mesure span:nth-child(2) {
+  font-family: var(--ff-ui);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .5px;
+  color: var(--cyan);
+  text-transform: uppercase;
+}
+
+.pricing-sur-mesure-sub {
+  font-family: var(--ff-ui);
+  font-size: 10px !important;
+  font-weight: 500 !important;
+  color: rgba(0,229,255,.6) !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+}
+
+/* ── No commission badge ─────────────────────────────── */
+.pricing-no-commission {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  background: linear-gradient(135deg, rgba(168,85,247,.15), rgba(168,85,247,.05));
+  border: 1px solid rgba(168,85,247,.4);
+  border-radius: 10px;
+  padding: 10px 14px;
+  margin-bottom: 18px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  animation: commissionPulse 3s ease-in-out infinite;
+}
+
+.pricing-no-commission::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(168,85,247,.08), transparent);
+  transform: translateX(-100%);
+  animation: commissionShine 3s ease-in-out infinite;
+}
+
+@keyframes commissionShine {
+  0%   { transform: translateX(-100%); }
+  50%  { transform: translateX(100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes commissionPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(168,85,247,0); }
+  50%       { box-shadow: 0 0 16px 2px rgba(168,85,247,.2); }
+}
+
+.pricing-no-commission-icon {
+  font-size: 18px;
+  line-height: 1;
+  margin-bottom: 2px;
+}
+
+.pricing-no-commission span:nth-child(2) {
+  font-family: var(--ff-ui);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .5px;
+  color: #d8b4fe;
+  text-transform: uppercase;
+}
+
+.pricing-no-commission-vs {
+  font-family: var(--ff-ui);
+  font-size: 10px !important;
+  font-weight: 500 !important;
+  color: rgba(168,85,247,.7) !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+}
+
+/* ── No commission resto badge ───────────────────────── */
+.pricing-no-commission-resto {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  background: linear-gradient(135deg, rgba(34,197,94,.15), rgba(34,197,94,.05));
+  border: 1px solid rgba(34,197,94,.4);
+  border-radius: 10px;
+  padding: 10px 14px;
+  margin-bottom: 18px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  animation: restoPulse 3s ease-in-out infinite;
+}
+
+.pricing-no-commission-resto::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(34,197,94,.08), transparent);
+  transform: translateX(-100%);
+  animation: commissionShine 3s ease-in-out infinite;
+}
+
+@keyframes restoPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); }
+  50%       { box-shadow: 0 0 16px 2px rgba(34,197,94,.2); }
+}
+
+.pricing-no-commission-resto span:nth-child(2) {
+  font-family: var(--ff-ui);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .5px;
+  color: #86efac;
+  text-transform: uppercase;
+}
+
+.pricing-no-commission-resto .pricing-no-commission-vs {
+  color: rgba(34,197,94,.7) !important;
 }
 
 /* ── FAQ ─────────────────────────────────────────────── */

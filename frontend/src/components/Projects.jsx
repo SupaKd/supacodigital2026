@@ -75,7 +75,7 @@ const projects = [
   {
     num: "08",
     name: "Restaurant Lyon",
-    tags: ["Site Vitrine", "React"],
+    tags: ["Portfolio", "React"],
     placeholder: "RL",
     desc: "Site vitrine pour un restaurant. Présentation de la carte, ambiance du lieu et réservation en ligne.",
     url: "https://restaurant-t.vercel.app/",
@@ -141,7 +141,13 @@ export default function Projects() {
                   {/* Visuel */}
                   <div className="proj-visual">
                     {p.logo ? (
-                      <img src={p.logo} alt={p.name} className="proj-logo" loading="lazy" decoding="async" />
+                      <img
+                        src={p.logo}
+                        alt={p.name}
+                        className="proj-logo"
+                        loading="lazy"
+                        decoding="async"
+                      />
                     ) : (
                       <div className="proj-placeholder">{p.placeholder}</div>
                     )}

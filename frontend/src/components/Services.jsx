@@ -12,26 +12,32 @@ const plans = [
     color: 'var(--cyan)',
     glow: 'rgba(0,229,255,.15)',
     popular: false,
+    surMesure: true,
     cta: 'Choisir Starter',
     sections: [
       {
-        label: 'CONTENU',
+        label: 'VOTRE SITE',
         features: [
           { text: "Jusqu'à 5 pages", included: true },
-          { text: 'Design responsive', included: true },
+          { text: 'Design responsive (mobile & desktop)', included: true },
+          { text: 'Formulaire de contact', included: true },
+          { text: 'Nom de domaine + hébergement offerts 1 an', included: true },
+          { text: 'Livraison en ~7 jours', included: true },
           { text: 'SEO optimisé', included: false },
           { text: 'Blog / actualités', included: false },
           { text: 'Paiement en ligne', included: false },
-          { text: 'Dashboard admin', included: false },
         ],
       },
       {
-        label: 'SUPPORT',
+        label: 'SUIVI INCLUS',
         features: [
-          { text: 'Hébergement inclus', included: true },
-          { text: 'Mises à jour & sécurité incluses', included: true },
-          { text: '1 modif/mois', included: true },
-          { text: 'Support prioritaire', included: false },
+          { text: '1 modification/mois', included: true },
+          { text: 'Corrections de bugs', included: true },
+          { text: 'Mises à jour & sécurité', included: true },
+          { text: 'Sauvegardes automatiques', included: true },
+          { text: 'Support email — réponse sous 72h', included: true },
+          { text: 'Accès Google Analytics', included: false },
+          { text: 'Formation à la prise en main', included: false },
         ],
       },
     ],
@@ -46,26 +52,32 @@ const plans = [
     color: '#1a6bff',
     glow: 'rgba(26,107,255,.2)',
     popular: true,
+    surMesure: true,
     cta: 'Choisir Pro',
     sections: [
       {
-        label: 'CONTENU',
+        label: 'VOTRE SITE',
         features: [
           { text: "Jusqu'à 10 pages", included: true },
-          { text: 'Design responsive', included: true },
-          { text: 'SEO optimisé', included: true },
-          { text: 'Blog / actualités', included: true },
+          { text: 'Design responsive (mobile & desktop)', included: true },
+          { text: 'Formulaire de contact', included: true },
+          { text: 'Nom de domaine + hébergement offerts 1 an', included: true },
+          { text: 'Livraison en ~7 jours', included: true },
+          { text: 'SEO on-page optimisé (balises, vitesse, structure)', included: true },
+          { text: 'Blog & galerie de réalisations', included: true },
           { text: 'Paiement en ligne', included: false },
-          { text: 'Dashboard admin', included: false },
         ],
       },
       {
-        label: 'SUPPORT',
+        label: 'SUIVI INCLUS',
         features: [
-          { text: 'Hébergement inclus', included: true },
-          { text: 'Mises à jour & sécurité incluses', included: true },
-          { text: '2 à 3 modifs/mois', included: true },
-          { text: 'Support prioritaire', included: true },
+          { text: '3 modifications/mois', included: true },
+          { text: 'Corrections de bugs', included: true },
+          { text: 'Mises à jour & sécurité', included: true },
+          { text: 'Sauvegardes automatiques', included: true },
+          { text: 'Accès Google Analytics', included: true },
+          { text: 'Support email — réponse sous 48h', included: true },
+          { text: 'Formation à la prise en main', included: true },
         ],
       },
     ],
@@ -80,70 +92,87 @@ const plans = [
     color: '#a855f7',
     glow: 'rgba(168,85,247,.15)',
     popular: false,
+    noCommission: true,
     cta: 'Choisir E-commerce',
     sections: [
       {
-        label: 'CONTENU',
+        label: 'VOTRE SITE',
         features: [
           { text: 'Produits illimités', included: true },
-          { text: 'Design responsive', included: true },
-          { text: 'SEO optimisé', included: true },
-          { text: 'Blog / actualités', included: true },
+          { text: 'Design responsive (mobile & desktop)', included: true },
+          { text: 'Formulaire de contact', included: true },
+          { text: 'Nom de domaine + hébergement offerts 1 an', included: true },
+          { text: 'Livraison en ~2-3 semaines', included: true },
+          { text: 'SEO on-page optimisé + Blog', included: true },
           { text: 'Paiement en ligne', included: true },
           { text: 'Dashboard admin', included: true },
+          { text: 'Gestion des stocks incluse', included: true },
+          { text: 'Configuration modes de livraison', included: true },
+          { text: 'Intégration de vos produits (jusqu\'à 30 réf.)', included: true },
         ],
       },
       {
-        label: 'SUPPORT',
+        label: 'SUIVI INCLUS',
         features: [
-          { text: 'Hébergement inclus', included: true },
-          { text: 'Mises à jour & sécurité incluses', included: true },
-          { text: '3 à 5 modifs/mois', included: true },
-          { text: 'Support prioritaire', included: true },
+          { text: '5 modifications/mois', included: true },
+          { text: 'Corrections de bugs', included: true },
+          { text: 'Mises à jour & sécurité', included: true },
+          { text: 'Sauvegardes automatiques', included: true },
+          { text: 'Accès Google Analytics', included: true },
+          { text: 'Support email — réponse sous 24h', included: true },
+          { text: 'Formation à la prise en main', included: true },
         ],
       },
     ],
   },
   {
     id: 'webapp',
-    name: 'APPLICATION WEB',
-    contactValue: 'Application Web — Sur devis',
-    price: null,
-    setup: null,
-    commitment: 'Selon projet',
+    name: 'APP RESTAURANT',
+    contactValue: 'App Restaurant — 249€/mois',
+    price: 249,
+    setup: 990,
+    commitment: 'Engagement 12 mois',
     color: '#22c55e',
     glow: 'rgba(34,197,94,.15)',
     popular: false,
-    cta: 'Demander un devis',
+    noCommissionResto: true,
+    cta: 'Choisir App Restaurant',
     sections: [
       {
-        label: 'CONTENU',
+        label: 'VOTRE APP',
         features: [
-          { text: 'Pages sur mesure', included: true },
-          { text: 'Design responsive', included: true },
+          { text: 'Menu en ligne consultable', included: true },
+          { text: 'Commande à emporter & livraison', included: true },
+          { text: 'Paiement en ligne intégré', included: true },
+          { text: 'Dashboard gérant (plats, commandes)', included: true },
+          { text: 'Design responsive (mobile & desktop)', included: true },
+          { text: 'Nom de domaine + hébergement offerts 1 an', included: true },
           { text: 'SEO optimisé', included: true },
-          { text: 'Paiement en ligne', included: true },
-          { text: 'Dashboard admin', included: true },
-          { text: 'Fonctionnalités custom', included: true },
         ],
       },
       {
-        label: 'SUPPORT',
+        label: 'SUIVI INCLUS',
         features: [
-          { text: 'Hébergement inclus', included: true },
-          { text: 'Mises à jour & sécurité incluses', included: true },
-          { text: 'Modifs sur mesure', included: true },
-          { text: 'Support prioritaire', included: true },
+          { text: '3 mises à jour de contenu/mois', included: true },
+          { text: 'Corrections de bugs', included: true },
+          { text: 'Mises à jour & sécurité', included: true },
+          { text: 'Sauvegardes automatiques', included: true },
+          { text: 'Accès Google Analytics', included: true },
+          { text: 'Formation à la prise en main', included: true },
+          { text: 'Support email — réponse sous 24h', included: true },
+          { text: 'Nouvelles fonctionnalités', included: false },
         ],
       },
     ],
   },
 ]
 
-function PricingCard({ plan, annual, showArrow }) {
+function PricingCard({ plan, annual, showArrow, onOpenDevis }) {
   const monthlyPrice = annual && plan.price
     ? Math.round(plan.price * 0.85)
     : plan.price
+
+  const savings = plan.price ? Math.round(plan.price * 0.15 * 24) : null
 
   return (
     <div
@@ -180,7 +209,36 @@ function PricingCard({ plan, annual, showArrow }) {
         <div className="pricing-commitment">
           {plan.commitment === 'Selon projet' ? 'Selon projet' : `Engagement ${annual ? '24' : '12'} mois`}
         </div>
+
+        {annual && savings && (
+          <div className="pricing-savings">
+            <span className="pricing-savings-icon">🎉</span>
+            Vous économisez <strong>{savings} €</strong> sur 24 mois
+          </div>
+        )}
       </div>
+
+      {plan.surMesure && (
+        <div className="pricing-sur-mesure">
+          <span className="pricing-sur-mesure-icon">✦</span>
+          <span>100% sur mesure — zéro template</span>
+          <span className="pricing-sur-mesure-sub">Identité unique, rien que pour vous</span>
+        </div>
+      )}
+      {plan.noCommissionResto && (
+        <div className="pricing-no-commission-resto">
+          <span className="pricing-no-commission-icon">🍽️</span>
+          <span>0% de commission sur vos commandes</span>
+          <span className="pricing-no-commission-vs">vs Uber Eats jusqu'à 30%</span>
+        </div>
+      )}
+      {plan.noCommission && (
+        <div className="pricing-no-commission">
+          <span className="pricing-no-commission-icon">🚫</span>
+          <span>0% de commission sur vos ventes</span>
+          <span className="pricing-no-commission-vs">vs Shopify jusqu'à 2%</span>
+        </div>
+      )}
 
       <div className="pricing-divider" />
 
@@ -203,10 +261,7 @@ function PricingCard({ plan, annual, showArrow }) {
 
       <button
         className="pricing-cta"
-        onClick={() => {
-          sessionStorage.setItem('selectedService', plan.contactValue)
-          document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
-        }}
+        onClick={() => onOpenDevis(plan.id)}
       >
         {plan.cta}
         <span className="pricing-cta-arrow">↗</span>
@@ -262,7 +317,7 @@ function FAQ() {
   )
 }
 
-export default function Services() {
+export default function Services({ onOpenDevis }) {
   const [plan24, setPlan24] = useState(false)
   const [activeIndex, setActiveIndex] = useState(0)
 
@@ -296,7 +351,7 @@ export default function Services() {
 
       <div className="pricing-grid" onScroll={handleScroll}>
         {plans.map((plan, i) => (
-          <PricingCard key={plan.id} plan={plan} annual={plan24} showArrow={i < plans.length - 1} />
+          <PricingCard key={plan.id} plan={plan} annual={plan24} showArrow={i < plans.length - 1} onOpenDevis={onOpenDevis} />
         ))}
       </div>
 

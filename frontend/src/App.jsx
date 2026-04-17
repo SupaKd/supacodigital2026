@@ -5,6 +5,7 @@ import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import About from './components/About'
 import Services from './components/Services'
+import DevisGenerator from './components/DevisGenerator'
 import Projects from './components/Projects'
 import Testimonials from './components/Testimonials'
 import Zone from './components/Zone'
@@ -17,7 +18,14 @@ import CalendlyModal from './components/CalendlyModal'
 export default function App() {
   const [loaded, setLoaded] = useState(false)
   const [calendlyOpen, setCalendlyOpen] = useState(false)
+  const [devisOpen, setDevisOpen] = useState(false)
+  const [devisPlan, setDevisPlan] = useState(null)
   const navLogoRef = useRef(null)
+
+  function openDevis(planId = null) {
+    setDevisPlan(planId)
+    setDevisOpen(true)
+  }
 
   return (
     <>
@@ -28,13 +36,19 @@ export default function App() {
         />
       )}
       {calendlyOpen && <CalendlyModal onClose={() => setCalendlyOpen(false)} />}
-      <Navbar navLogoRef={navLogoRef} onOpenCalendly={() => setCalendlyOpen(true)} />
+      {devisOpen && (
+        <DevisGenerator
+          initialPlan={devisPlan}
+          onClose={() => { setDevisOpen(false); setDevisPlan(null) }}
+        />
+      )}
+      <Navbar navLogoRef={navLogoRef} onOpenCalendly={() => setCalendlyOpen(true)} onOpenDevis={openDevis} />
       <main>
         <Hero onOpenCalendly={() => setCalendlyOpen(true)} />
         <div className="divider divider--dark" />
         <About />
         <div className="divider divider--light" />
-        <Services />
+        <Services onOpenDevis={openDevis} />
         <div className="divider" />
         <Projects />
         <div className="divider" />

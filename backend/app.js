@@ -447,6 +447,73 @@ app.post("/api/contact", contactLimiter, async (req, res) => {
   return res.status(500).json({ error: "Erreur lors de l'envoi de l'email." });
 });
 
+// ─── Route : Notification devis ──────────────────────────────────────────────
+app.post("/api/devis", contactLimiter, async (req, res) => {
+  const raw = req.body;
+
+  const name       = sanitizeShort(raw.name, 100);
+  const company    = sanitizeShort(raw.company, 100);
+  const email      = sanitizeShort(raw.email, 200);
+  const phone      = sanitizeShort(raw.phone, 30);
+  const devisNumber = sanitizeShort(raw.devisNumber, 30);
+  const summary    = sanitize(raw.summary);
+
+  if (!name)  return res.status(400).json({ error: "Le nom est requis." });
+  if (!email) return res.status(400).json({ error: "L'email est requis." });
+  if (!EMAIL_REGEX.test(email)) return res.status(400).json({ error: "Adresse email invalide." });
+
+  const emailConfigured =
+    process.env.EMAIL_PASS &&
+    !process.env.EMAIL_PASS.includes("VOTRE_") &&
+    !process.env.EMAIL_PASS.includes("votre_");
+
+  if (isTest || !emailConfigured) {
+    if (!isTest) console.log("📄 [DEV] Devis généré :", { name, email, devisNumber, summary });
+    return res.json({ success: true });
+  }
+
+  const transporter = nodemailer.createTransport({
+    host: process.env.EMAIL_HOST,
+    port: Number(process.env.EMAIL_PORT),
+    secure: false,
+    auth: { user: process.env.EMAIL_USER, pass: process.env.EMAIL_PASS },
+  });
+
+  try {
+    await transporter.sendMail({
+      from: `"Supaco Digital — Devis" <${process.env.EMAIL_USER}>`,
+      to: process.env.EMAIL_TO,
+      subject: `📄 Nouveau devis généré — ${name} (${devisNumber})`,
+      replyTo: email,
+      html: `
+        <div style="font-family:sans-serif;max-width:600px;margin:0 auto">
+          <h2 style="color:#111;border-bottom:2px solid #00e5ff;padding-bottom:12px">
+            📄 Nouveau devis généré — Supaco Digital
+          </h2>
+          <table style="width:100%;border-collapse:collapse;margin-bottom:24px">
+            <tr><td style="padding:8px 0;color:#666;width:140px"><strong>Numéro</strong></td><td>${devisNumber}</td></tr>
+            <tr><td style="padding:8px 0;color:#666"><strong>Nom</strong></td><td>${name}</td></tr>
+            ${company ? `<tr><td style="padding:8px 0;color:#666"><strong>Société</strong></td><td>${company}</td></tr>` : ''}
+            <tr><td style="padding:8px 0;color:#666"><strong>Email</strong></td><td><a href="mailto:${email}">${email}</a></td></tr>
+            ${phone ? `<tr><td style="padding:8px 0;color:#666"><strong>Téléphone</strong></td><td><a href="tel:${phone}">${phone}</a></td></tr>` : ''}
+          </table>
+          <h3 style="color:#333;margin-bottom:12px">Détail du devis :</h3>
+          <div style="background:#f5f5f5;padding:16px;border-left:4px solid #00e5ff;white-space:pre-wrap;font-size:14px;line-height:1.6">
+${summary}
+          </div>
+          <p style="margin-top:24px;color:#999;font-size:12px">
+            Généré automatiquement depuis le configurateur de devis — supaco.digital
+          </p>
+        </div>
+      `,
+    });
+    return res.json({ success: true });
+  } catch (err) {
+    console.error("Devis email error:", err.message);
+    return res.status(500).json({ error: "Erreur lors de l'envoi de la notification." });
+  }
+});
+
 // ─── 404 handler ─────────────────────────────────────────────────────────────
 app.use((_, res) => res.status(404).json({ error: "Route introuvable." }));
 
