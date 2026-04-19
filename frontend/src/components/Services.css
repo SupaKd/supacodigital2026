@@ -244,6 +244,31 @@
   margin-bottom: 10px;
 }
 
+/* ── Voir plus (mobile uniquement) ──────────────────── */
+.pricing-see-more {
+  display: none;
+}
+@media (max-width: 640px) {
+  .pricing-see-more {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: none;
+    border: none;
+    color: var(--plan-color);
+    font-family: var(--ff-ui);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    padding: 6px 0 2px;
+    -webkit-tap-highlight-color: transparent;
+    opacity: 0.85;
+  }
+  .pricing-see-more:active { opacity: 0.6; }
+}
+
 /* ── Features ────────────────────────────────────────── */
 .pricing-features {
   list-style: none;
@@ -580,7 +605,6 @@
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
-    touch-action: pan-x;
     gap: 12px;
     margin-left: calc(-1 * var(--space-6, 20px));
     margin-right: calc(-1 * var(--space-6, 20px));

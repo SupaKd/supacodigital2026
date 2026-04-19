@@ -1,5 +1,18 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Icon } from '../icons'
+
+const PREVIEW_COUNT = 4
+
+function useIsMobile() {
+  const [mobile, setMobile] = useState(() => window.innerWidth <= 640)
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 640px)')
+    const handler = e => setMobile(e.matches)
+    mq.addEventListener('change', handler)
+    return () => mq.removeEventListener('change', handler)
+  }, [])
+  return mobile
+}
 
 const plans = [
   {
@@ -173,6 +186,8 @@ function PricingCard({ plan, annual, showArrow, onOpenDevis }) {
     : plan.price
 
   const savings = plan.price ? Math.round(plan.price * 0.15 * 24) : null
+  const [expanded, setExpanded] = useState({})
+  const isMobile = useIsMobile()
 
   return (
     <div
@@ -242,22 +257,33 @@ function PricingCard({ plan, annual, showArrow, onOpenDevis }) {
 
       <div className="pricing-divider" />
 
-      {plan.sections.map(section => (
-        <div key={section.label} className="pricing-section">
-          <div className="pricing-section-label">{section.label}</div>
-          <ul className="pricing-features">
-            {section.features.map(f => (
-              <li key={f.text} className={`pricing-feature${f.included ? '' : ' pricing-feature--off'}`}>
-                {f.included
-                  ? <Icon.Check />
-                  : <Icon.XMark />}
-                {f.text}
-              </li>
-            ))}
-          </ul>
-          <div className="pricing-divider" />
-        </div>
-      ))}
+      {plan.sections.map(section => {
+        const isOpen = expanded[section.label]
+        const hasMore = isMobile && section.features.length > PREVIEW_COUNT
+        const visible = (isMobile && !isOpen) ? section.features.slice(0, PREVIEW_COUNT) : section.features
+        return (
+          <div key={section.label} className="pricing-section">
+            <div className="pricing-section-label">{section.label}</div>
+            <ul className="pricing-features">
+              {visible.map(f => (
+                <li key={f.text} className={`pricing-feature${f.included ? '' : ' pricing-feature--off'}`}>
+                  {f.included ? <Icon.Check /> : <Icon.XMark />}
+                  {f.text}
+                </li>
+              ))}
+            </ul>
+            {hasMore && (
+              <button
+                className="pricing-see-more"
+                onClick={() => setExpanded(e => ({ ...e, [section.label]: !e[section.label] }))}
+              >
+                {isOpen ? 'Voir moins ↑' : `Voir plus (${section.features.length - PREVIEW_COUNT}) ↓`}
+              </button>
+            )}
+            <div className="pricing-divider" />
+          </div>
+        )
+      })}
 
       <button
         className="pricing-cta"
