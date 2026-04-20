@@ -6,27 +6,18 @@ const projects = [
   {
     num: "01",
     name: "Kekosan",
-    tags: ["Application Web", "React", "Node.js"],
+    tags: ["App restaurant"],
     placeholder: "KK",
     logo: "/logo/logokekosan.png",
     desc: "Application web pour un restaurant. Commandes en ligne, gestion des menus et interface d'administration sur mesure.",
     url: "https://www.kekosan.com/",
     year: "2026",
   },
+
   {
     num: "02",
-    name: "Sabai Thoiry",
-    tags: ["Application Web", "React", "Node.js", "MySQL"],
-    placeholder: "ST",
-    logo: "/logo/logosabai.png",
-    desc: "Application de commandes en ligne pour un restaurant thaï. Gestion des menus, commandes en temps réel et interface d'administration.",
-    url: "https://sabai-thoiry.com/",
-    year: "2026",
-  },
-  {
-    num: "03",
     name: "MB Patrimoine",
-    tags: ["Site Vitrine", "React"],
+    tags: ["Site Vitrine"],
     placeholder: "MB",
     logo: "/logo/mbpatrimoine.png",
     desc: "Site vitrine pour une conseillère en gestion de patrimoine. Design soigné, formulaire de contact et présentation des services.",
@@ -34,9 +25,9 @@ const projects = [
     year: "2026",
   },
   {
-    num: "04",
+    num: "03",
     name: "Bellifood",
-    tags: ["Site Vitrine", "React"],
+    tags: ["Site Vitrine"],
     placeholder: "BF",
     logo: "/logo/belli.logo.png",
     desc: "Site vitrine pour une entreprise de restauration. Présentation des services, menu et prise de contact.",
@@ -44,9 +35,19 @@ const projects = [
     year: "2025",
   },
   {
+    num: "04",
+    name: "Sabai Thoiry",
+    tags: ["App restaurant"],
+    placeholder: "ST",
+    logo: "/logo/logosabai.png",
+    desc: "Application de commandes en ligne pour un restaurant. Gestion des menus, commandes en temps réel et interface d'administration.",
+    url: "https://sabai-thoiry.com/",
+    year: "2026",
+  },
+  {
     num: "05",
     name: "Dépannage Gémeaux",
-    tags: ["Site Vitrine", "React"],
+    tags: ["Site Vitrine"],
     placeholder: "DG",
     logo: "/logo/depannagegemeaux.svg",
     desc: "Site vitrine pour un service de dépannage. Mise en avant des interventions, zone géographique et formulaire de demande urgente.",
@@ -56,7 +57,7 @@ const projects = [
   {
     num: "06",
     name: "Yojeme",
-    tags: ["Site Vitrine", "React"],
+    tags: ["Site Vitrine"],
     placeholder: "YJ",
     logo: "/logo/yojeme.png",
     desc: "Site vitrine moderne pour une marque indépendante. Design épuré, identité visuelle forte et expérience utilisateur soignée.",
@@ -66,7 +67,7 @@ const projects = [
   {
     num: "07",
     name: "Photographe",
-    tags: ["Portfolio", "React"],
+    tags: ["Portfolio"],
     placeholder: "PH",
     desc: "Portfolio en ligne pour un photographe professionnel. Galerie immersive, présentation des prestations et prise de rendez-vous.",
     url: "https://photographe-six.vercel.app/",
@@ -75,7 +76,7 @@ const projects = [
   {
     num: "08",
     name: "Restaurant Lyon",
-    tags: ["Portfolio", "React"],
+    tags: ["Portfolio"],
     placeholder: "RL",
     desc: "Site vitrine pour un restaurant. Présentation de la carte, ambiance du lieu et réservation en ligne.",
     url: "https://restaurant-t.vercel.app/",
@@ -89,6 +90,7 @@ export default function Projects() {
 
   const toggle = (i) => setActive(active === i ? null : i);
   const visible = showAll ? projects : projects.slice(0, 3);
+  const INITIAL = 3;
 
   return (
     <section className="section projects" id="projets">
@@ -109,10 +111,12 @@ export default function Projects() {
       <div className="proj-list">
         {visible.map((p, i) => {
           const isOpen = active === i;
+          const isNew = showAll && i >= INITIAL;
           return (
             <div
               key={p.num}
-              className={`proj-item${isOpen ? " proj-item--open" : ""}`}
+              className={`proj-item${isOpen ? " proj-item--open" : ""}${isNew ? " proj-item--reveal" : ""}`}
+              style={isNew ? { '--reveal-delay': `${(i - INITIAL) * 80}ms` } : undefined}
             >
               {/* ── Ligne cliquable ── */}
               <button

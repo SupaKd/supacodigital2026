@@ -1,7 +1,6 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Icon } from '../icons'
 
-const PREVIEW_COUNT = 4
 
 function useIsMobile() {
   const [mobile, setMobile] = useState(() => window.innerWidth <= 640)
@@ -32,10 +31,8 @@ const plans = [
         label: 'VOTRE SITE',
         features: [
           { text: "Jusqu'à 5 pages", included: true },
-          { text: 'Design responsive (mobile & desktop)', included: true },
-          { text: 'Formulaire de contact', included: true },
-          { text: 'Nom de domaine + hébergement offerts 1 an', included: true },
           { text: 'Livraison en ~7 jours', included: true },
+          { text: 'Nom de domaine + hébergement offerts 1 an', included: true },
           { text: 'SEO optimisé', included: false },
           { text: 'Blog / actualités', included: false },
           { text: 'Paiement en ligne', included: false },
@@ -45,11 +42,8 @@ const plans = [
         label: 'SUIVI INCLUS',
         features: [
           { text: '1 modification/mois', included: true },
-          { text: 'Corrections de bugs', included: true },
-          { text: 'Mises à jour & sécurité', included: true },
-          { text: 'Sauvegardes automatiques', included: true },
           { text: 'Support email — réponse sous 72h', included: true },
-          { text: 'Accès Google Analytics', included: false },
+          { text: 'Google Analytics', included: false },
           { text: 'Formation à la prise en main', included: false },
         ],
       },
@@ -72,11 +66,9 @@ const plans = [
         label: 'VOTRE SITE',
         features: [
           { text: "Jusqu'à 10 pages", included: true },
-          { text: 'Design responsive (mobile & desktop)', included: true },
-          { text: 'Formulaire de contact', included: true },
-          { text: 'Nom de domaine + hébergement offerts 1 an', included: true },
           { text: 'Livraison en ~7 jours', included: true },
-          { text: 'SEO on-page optimisé (balises, vitesse, structure)', included: true },
+          { text: 'Nom de domaine + hébergement offerts 1 an', included: true },
+          { text: 'SEO on-page optimisé', included: true },
           { text: 'Blog & galerie de réalisations', included: true },
           { text: 'Paiement en ligne', included: false },
         ],
@@ -85,11 +77,8 @@ const plans = [
         label: 'SUIVI INCLUS',
         features: [
           { text: '3 modifications/mois', included: true },
-          { text: 'Corrections de bugs', included: true },
-          { text: 'Mises à jour & sécurité', included: true },
-          { text: 'Sauvegardes automatiques', included: true },
-          { text: 'Accès Google Analytics', included: true },
           { text: 'Support email — réponse sous 48h', included: true },
+          { text: 'Google Analytics', included: true },
           { text: 'Formation à la prise en main', included: true },
         ],
       },
@@ -112,27 +101,19 @@ const plans = [
         label: 'VOTRE SITE',
         features: [
           { text: 'Produits illimités', included: true },
-          { text: 'Design responsive (mobile & desktop)', included: true },
-          { text: 'Formulaire de contact', included: true },
-          { text: 'Nom de domaine + hébergement offerts 1 an', included: true },
-          { text: 'Livraison en ~2-3 semaines', included: true },
-          { text: 'SEO on-page optimisé + Blog', included: true },
           { text: 'Paiement en ligne', included: true },
-          { text: 'Dashboard admin', included: true },
-          { text: 'Gestion des stocks incluse', included: true },
-          { text: 'Configuration modes de livraison', included: true },
-          { text: 'Intégration de vos produits (jusqu\'à 30 réf.)', included: true },
+          { text: 'Dashboard admin & gestion stocks', included: true },
+          { text: 'SEO on-page + Blog', included: true },
+          { text: "Intégration produits (jusqu'à 30 réf.)", included: true },
+          { text: 'Livraison en ~2-3 semaines', included: true },
         ],
       },
       {
         label: 'SUIVI INCLUS',
         features: [
           { text: '5 modifications/mois', included: true },
-          { text: 'Corrections de bugs', included: true },
-          { text: 'Mises à jour & sécurité', included: true },
-          { text: 'Sauvegardes automatiques', included: true },
-          { text: 'Accès Google Analytics', included: true },
           { text: 'Support email — réponse sous 24h', included: true },
+          { text: 'Google Analytics', included: true },
           { text: 'Formation à la prise en main', included: true },
         ],
       },
@@ -154,44 +135,36 @@ const plans = [
       {
         label: 'VOTRE APP',
         features: [
-          { text: 'Menu en ligne consultable', included: true },
           { text: 'Commande à emporter & livraison', included: true },
           { text: 'Paiement en ligne intégré', included: true },
           { text: 'Dashboard gérant (plats, commandes)', included: true },
-          { text: 'Design responsive (mobile & desktop)', included: true },
-          { text: 'Nom de domaine + hébergement offerts 1 an', included: true },
           { text: 'SEO optimisé', included: true },
+          { text: 'Nouvelles fonctionnalités', included: false },
         ],
       },
       {
         label: 'SUIVI INCLUS',
         features: [
           { text: '3 mises à jour de contenu/mois', included: true },
-          { text: 'Corrections de bugs', included: true },
-          { text: 'Mises à jour & sécurité', included: true },
-          { text: 'Sauvegardes automatiques', included: true },
-          { text: 'Accès Google Analytics', included: true },
-          { text: 'Formation à la prise en main', included: true },
           { text: 'Support email — réponse sous 24h', included: true },
-          { text: 'Nouvelles fonctionnalités', included: false },
+          { text: 'Google Analytics', included: true },
+          { text: 'Formation à la prise en main', included: true },
         ],
       },
     ],
   },
 ]
 
-function PricingCard({ plan, annual, showArrow, onOpenDevis }) {
+function PricingCard({ plan, annual, showArrow, onOpenDevis, active }) {
   const monthlyPrice = annual && plan.price
     ? Math.round(plan.price * 0.85)
     : plan.price
 
   const savings = plan.price ? Math.round(plan.price * 0.15 * 24) : null
-  const [expanded, setExpanded] = useState({})
-  const isMobile = useIsMobile()
 
   return (
     <div
-      className={`pricing-card${plan.popular ? ' pricing-card--popular' : ''}`}
+      className={`pricing-card${plan.popular ? ' pricing-card--popular' : ''}${active ? ' pricing-card--active' : ''}`}
       style={{ '--plan-color': plan.color, '--plan-glow': plan.glow }}
     >
       {plan.popular && (
@@ -235,21 +208,18 @@ function PricingCard({ plan, annual, showArrow, onOpenDevis }) {
 
       {plan.surMesure && (
         <div className="pricing-sur-mesure">
-          <span className="pricing-sur-mesure-icon">✦</span>
           <span>100% sur mesure — zéro template</span>
           <span className="pricing-sur-mesure-sub">Identité unique, rien que pour vous</span>
         </div>
       )}
       {plan.noCommissionResto && (
         <div className="pricing-no-commission-resto">
-          <span className="pricing-no-commission-icon">🍽️</span>
           <span>0% de commission sur vos commandes</span>
           <span className="pricing-no-commission-vs">vs Uber Eats jusqu'à 30%</span>
         </div>
       )}
       {plan.noCommission && (
         <div className="pricing-no-commission">
-          <span className="pricing-no-commission-icon">🚫</span>
           <span>0% de commission sur vos ventes</span>
           <span className="pricing-no-commission-vs">vs Shopify jusqu'à 2%</span>
         </div>
@@ -258,9 +228,7 @@ function PricingCard({ plan, annual, showArrow, onOpenDevis }) {
       <div className="pricing-divider" />
 
       {plan.sections.map(section => {
-        const isOpen = expanded[section.label]
-        const hasMore = isMobile && section.features.length > PREVIEW_COUNT
-        const visible = (isMobile && !isOpen) ? section.features.slice(0, PREVIEW_COUNT) : section.features
+        const visible = section.features
         return (
           <div key={section.label} className="pricing-section">
             <div className="pricing-section-label">{section.label}</div>
@@ -272,14 +240,6 @@ function PricingCard({ plan, annual, showArrow, onOpenDevis }) {
                 </li>
               ))}
             </ul>
-            {hasMore && (
-              <button
-                className="pricing-see-more"
-                onClick={() => setExpanded(e => ({ ...e, [section.label]: !e[section.label] }))}
-              >
-                {isOpen ? 'Voir moins ↑' : `Voir plus (${section.features.length - PREVIEW_COUNT}) ↓`}
-              </button>
-            )}
             <div className="pricing-divider" />
           </div>
         )
@@ -290,67 +250,30 @@ function PricingCard({ plan, annual, showArrow, onOpenDevis }) {
         onClick={() => onOpenDevis(plan.id)}
       >
         {plan.cta}
-        <span className="pricing-cta-arrow">↗</span>
+        <span className="pricing-cta-arrow"><Icon.Arrow /></span>
       </button>
     </div>
   )
 }
 
-const faqs = [
-  {
-    q: "Est-ce que je garde mon site si j'arrête l'abonnement ?",
-    a: "Non. Le site est hébergé et maintenu dans le cadre de l'abonnement. Si vous résiliez, vous récupérez l'ensemble des fichiers sources pour les confier à un autre prestataire.",
-  },
-  {
-    q: "Que se passe-t-il à la fin de l'engagement 12 ou 24 mois ?",
-    a: "L'abonnement se renouvelle tacitement mois par mois. Vous pouvez résilier à tout moment avec un préavis de 30 jours.",
-  },
-  {
-    q: "La mise en place est-elle payée en une seule fois ?",
-    a: "Oui, la mise en place est un frais unique réglé au démarrage. Elle couvre la conception, le développement et la mise en ligne de votre site.",
-  },
-  {
-    q: "Puis-je changer d'offre en cours d'engagement ?",
-    a: "Oui, vous pouvez monter en gamme à tout moment. La différence de prix est proratisée sur le mois en cours.",
-  },
-  {
-    q: "Combien de temps pour avoir mon site en ligne ?",
-    a: "Starter et Pro : environ 1 semaine. E-Commerce : 2 à 3 semaines. Application Web : selon le cahier des charges, nous définissons ensemble le planning.",
-  },
-  {
-    q: "Que comprend exactement 'Mises à jour & sécurité incluses' ?",
-    a: "Mises à jour du CMS, des plugins et des dépendances, surveillance de sécurité, sauvegardes régulières. Vous n'avez rien à gérer techniquement.",
-  },
-]
-
-function FAQ() {
-  const [open, setOpen] = useState(null)
-  return (
-    <div className="faq-wrap">
-      <div className="faq-title">Questions fréquentes</div>
-      <div className="faq-list">
-        {faqs.map((item, i) => (
-          <div key={i} className={`faq-item${open === i ? ' faq-item--open' : ''}`}>
-            <button className="faq-q" onClick={() => setOpen(open === i ? null : i)}>
-              {item.q}
-              <span className="faq-chevron">{open === i ? '−' : '+'}</span>
-            </button>
-            {open === i && <div className="faq-a">{item.a}</div>}
-          </div>
-        ))}
-      </div>
-    </div>
-  )
-}
 
 export default function Services({ onOpenDevis }) {
   const [plan24, setPlan24] = useState(false)
   const [activeIndex, setActiveIndex] = useState(0)
+  const isMobile = useIsMobile()
+  const touchStartX = useRef(null)
 
-  function handleScroll(e) {
-    const el = e.currentTarget
-    const index = Math.round(el.scrollLeft / el.offsetWidth)
-    setActiveIndex(index)
+  function handleTouchStart(e) {
+    touchStartX.current = e.touches[0].clientX
+  }
+
+  function handleTouchEnd(e) {
+    if (touchStartX.current === null) return
+    const dx = e.changedTouches[0].clientX - touchStartX.current
+    touchStartX.current = null
+    if (Math.abs(dx) < 40) return
+    if (dx < 0) setActiveIndex(i => Math.min(i + 1, plans.length - 1))
+    else        setActiveIndex(i => Math.max(i - 1, 0))
   }
 
   return (
@@ -375,27 +298,47 @@ export default function Services({ onOpenDevis }) {
         <span className="pricing-save-badge">-15%</span>
       </div>
 
-      <div className="pricing-grid" onScroll={handleScroll}>
+      <div
+        className="pricing-grid"
+        onTouchStart={isMobile ? handleTouchStart : undefined}
+        onTouchEnd={isMobile ? handleTouchEnd : undefined}
+      >
         {plans.map((plan, i) => (
-          <PricingCard key={plan.id} plan={plan} annual={plan24} showArrow={i < plans.length - 1} onOpenDevis={onOpenDevis} />
-        ))}
-      </div>
-
-      <div className="pricing-swipe-hint">
-        <span>Glisser</span>
-        <span className="pricing-swipe-arrow">→</span>
-      </div>
-
-      <div className="pricing-slider-dots">
-        {plans.map((_, i) => (
-          <div
-            key={i}
-            className={`pricing-slider-dot${activeIndex === i ? ' pricing-slider-dot--active' : ''}`}
+          <PricingCard
+            key={plan.id}
+            plan={plan}
+            annual={plan24}
+            showArrow={false}
+            onOpenDevis={onOpenDevis}
+            active={!isMobile || activeIndex === i}
           />
         ))}
       </div>
 
-      <FAQ />
+{isMobile && (
+        <div className="pricing-slider-dots">
+          {plans.map((_, i) => (
+            <button
+              key={i}
+              className={`pricing-slider-dot${activeIndex === i ? ' pricing-slider-dot--active' : ''}`}
+              onClick={() => setActiveIndex(i)}
+              aria-label={`Voir l'offre ${plans[i].name}`}
+            />
+          ))}
+        </div>
+      )}
+
+      <div className="custom-card">
+        <div className="custom-card-glow" />
+        <p className="custom-card-desc">
+          Vous avez un projet hors catalogue ? Marketplace, SaaS, outil métier… On développe votre application sur mesure.
+        </p>
+        <button className="custom-card-cta" onClick={() => onOpenDevis('custom')}>
+          Discutons de votre projet
+          <span className="custom-card-cta-arrow"><Icon.Arrow /></span>
+        </button>
+      </div>
+
     </section>
   )
 }
