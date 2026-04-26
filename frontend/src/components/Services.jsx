@@ -17,9 +17,9 @@ const plans = [
   {
     id: 'starter',
     name: 'STARTER',
-    contactValue: 'Starter — 99€/mois',
-    price: 99,
-    setup: 199,
+    contactValue: 'Starter',
+    price: null,
+    setup: null,
     commitment: 'Engagement 12 mois',
     color: 'var(--cyan)',
     glow: 'rgba(0,229,255,.15)',
@@ -52,9 +52,9 @@ const plans = [
   {
     id: 'pro',
     name: 'PRO',
-    contactValue: 'Pro — 149€/mois',
-    price: 149,
-    setup: 299,
+    contactValue: 'Pro',
+    price: null,
+    setup: null,
     commitment: 'Engagement 12 mois',
     color: '#1a6bff',
     glow: 'rgba(26,107,255,.2)',
@@ -87,9 +87,9 @@ const plans = [
   {
     id: 'ecommerce',
     name: 'E-COMMERCE',
-    contactValue: 'E-Commerce — 249€/mois',
-    price: 249,
-    setup: 499,
+    contactValue: 'E-Commerce',
+    price: null,
+    setup: null,
     commitment: 'Engagement 12 mois',
     color: '#a855f7',
     glow: 'rgba(168,85,247,.15)',
@@ -122,9 +122,9 @@ const plans = [
   {
     id: 'webapp',
     name: 'APP RESTAURANT',
-    contactValue: 'App Restaurant — 249€/mois',
-    price: 249,
-    setup: 990,
+    contactValue: 'App Restaurant',
+    price: null,
+    setup: null,
     commitment: 'Engagement 12 mois',
     color: '#22c55e',
     glow: 'rgba(34,197,94,.15)',
@@ -155,13 +155,7 @@ const plans = [
   },
 ]
 
-function PricingCard({ plan, annual, showArrow, onOpenDevis, active }) {
-  const monthlyPrice = annual && plan.price
-    ? Math.round(plan.price * 0.85)
-    : plan.price
-
-  const savings = plan.price ? Math.round(plan.price * 0.15 * 24) : null
-
+function PricingCard({ plan, showArrow, onOpenDevis, active }) {
   return (
     <div
       className={`pricing-card${plan.popular ? ' pricing-card--popular' : ''}${active ? ' pricing-card--active' : ''}`}
@@ -178,32 +172,10 @@ function PricingCard({ plan, annual, showArrow, onOpenDevis, active }) {
         <div className="pricing-name">{plan.name}</div>
 
         <div className="pricing-price">
-          {plan.price ? (
-            <>
-              <span className="pricing-amount">{monthlyPrice}</span>
-              <span className="pricing-unit"> €/mois</span>
-            </>
-          ) : (
-            <span className="pricing-amount pricing-amount--devis">Sur devis</span>
-          )}
+          <span className="pricing-amount pricing-amount--devis">Sur devis</span>
         </div>
 
-        <div className="pricing-setup">
-          {plan.setup
-            ? `Mise en place : ${plan.setup} €`
-            : 'Mise en place : Sur devis'}
-        </div>
-
-        <div className="pricing-commitment">
-          {plan.commitment === 'Selon projet' ? 'Selon projet' : `Engagement ${annual ? '24' : '12'} mois`}
-        </div>
-
-        {annual && savings && (
-          <div className="pricing-savings">
-            <span className="pricing-savings-icon">🎉</span>
-            Vous économisez <strong>{savings} €</strong> sur 24 mois
-          </div>
-        )}
+        <div className="pricing-setup">Tarif personnalisé selon votre projet</div>
       </div>
 
       {plan.surMesure && (
@@ -258,7 +230,6 @@ function PricingCard({ plan, annual, showArrow, onOpenDevis, active }) {
 
 
 export default function Services({ onOpenDevis }) {
-  const [plan24, setPlan24] = useState(false)
   const [activeIndex, setActiveIndex] = useState(0)
   const isMobile = useIsMobile()
   const touchStartX = useRef(null)
@@ -278,25 +249,8 @@ export default function Services({ onOpenDevis }) {
 
   return (
     <section className="section" id="services">
-      <div className="section-label">Tarifs</div>
+      <div className="section-label">Offres</div>
       <h2 className="section-title">Choisissez votre <em>offre</em></h2>
-
-      <div className="pricing-toggle-wrap">
-        <span className={`pricing-toggle-label${!plan24 ? ' pricing-toggle-label--active' : ''}`}>
-          12 mois
-        </span>
-        <button
-          className={`pricing-toggle${plan24 ? ' pricing-toggle--on' : ''}`}
-          onClick={() => setPlan24(v => !v)}
-          aria-label="Basculer vers 24 mois"
-        >
-          <span className="pricing-toggle-thumb" />
-        </button>
-        <span className={`pricing-toggle-label${plan24 ? ' pricing-toggle-label--active' : ''}`}>
-          24 mois
-        </span>
-        <span className="pricing-save-badge">-15%</span>
-      </div>
 
       <div
         className="pricing-grid"
@@ -307,7 +261,6 @@ export default function Services({ onOpenDevis }) {
           <PricingCard
             key={plan.id}
             plan={plan}
-            annual={plan24}
             showArrow={false}
             onOpenDevis={onOpenDevis}
             active={!isMobile || activeIndex === i}

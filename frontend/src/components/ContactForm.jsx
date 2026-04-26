@@ -109,10 +109,11 @@ export default function ContactForm() {
             <label htmlFor="f-service">Service souhaité</label>
             <select id="f-service" value={form.service} onChange={set('service')}>
               <option value="">Choisir...</option>
-              <option>Starter — 99€/mois</option>
-              <option>Pro — 149€/mois</option>
-              <option>E-Commerce — 249€/mois</option>
-              <option>Application Web — Sur devis</option>
+              <option>Starter</option>
+              <option>Pro</option>
+              <option>E-Commerce</option>
+              <option>App Restaurant</option>
+              <option>Projet sur mesure</option>
             </select>
           </div>
         </div>

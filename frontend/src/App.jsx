@@ -4,6 +4,7 @@ import Loader from './components/Loader'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import About from './components/About'
+import CodeEditor from './components/CodeEditor'
 import Services from './components/Services'
 import DevisGenerator from './components/DevisGenerator'
 import Projects from './components/Projects'
@@ -47,6 +48,8 @@ export default function App() {
         <Hero onOpenCalendly={() => setCalendlyOpen(true)} />
         <div className="divider divider--dark" />
         <About />
+        <div className="divider divider--dark" />
+        <CodeEditor />
         <div className="divider divider--light" />
         <Services onOpenDevis={openDevis} />
         <div className="divider" />

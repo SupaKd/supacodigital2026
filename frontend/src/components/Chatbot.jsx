@@ -37,7 +37,7 @@ export default function Chatbot() {
   const [showBadge, setShowBadge] = useState(false)
   const [bubble, setBubble] = useState(false)
   const [quickReplies, setQuickReplies] = useState([
-    'Starter — 99€/mois', 'Pro — 149€/mois', 'E-Commerce — 249€/mois', 'App Restaurant — 249€/mois'
+    'Offre Starter', 'Offre Pro', 'Offre E-Commerce', 'App Restaurant'
   ])
   const msgsEnd = useRef(null)
   const notifiedRef = useRef(false)
@@ -109,7 +109,7 @@ export default function Chatbot() {
     const fresh = [INITIAL_MESSAGE]
     setMessages(fresh)
     saveHistory(fresh)
-    setQuickReplies(['Starter — 99€/mois', 'Pro — 149€/mois', 'E-Commerce — 249€/mois', 'App Restaurant — 249€/mois'])
+    setQuickReplies(['Offre Starter', 'Offre Pro', 'Offre E-Commerce', 'App Restaurant'])
   }
 
   const send = async (text) => {
