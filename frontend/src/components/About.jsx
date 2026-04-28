@@ -1,6 +1,38 @@
 import { Icon } from '../icons'
+import { useEffect, useRef, useState } from 'react'
+
+const STATS = [
+  { value: 20, suffix: '+', label: 'Projets livrés' },
+  { value: 7,  suffix: 'j', label: 'Délai moyen' },
+  { value: 100, suffix: '%', label: 'Sur mesure' },
+]
 
 export default function About() {
+  const statsRef = useRef(null)
+  const [vals, setVals] = useState(STATS.map(() => 0))
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return
+        observer.disconnect()
+        const duration = 1600
+        let start = null
+        const step = ts => {
+          if (!start) start = ts
+          const p = Math.min((ts - start) / duration, 1)
+          const ease = p * p
+          setVals(STATS.map(s => Math.round(ease * s.value)))
+          if (p < 1) requestAnimationFrame(step)
+        }
+        requestAnimationFrame(step)
+      },
+      { threshold: 0.4 }
+    )
+    if (statsRef.current) observer.observe(statsRef.current)
+    return () => observer.disconnect()
+  }, [])
+
   return (
     <section className="section about" id="propos">
       <div className="about-inner">
@@ -34,21 +66,21 @@ export default function About() {
             <br /><br />
             Pas de template générique. Chaque projet est conçu <mark className="about-mark">sur mesure</mark>, avec du code propre et une obsession pour les <mark className="about-mark">résultats concrets</mark> — plus de visibilité, plus de contacts, plus de ventes.
           </p>
+
+          <div className="about-stats" ref={statsRef}>
+            {STATS.map((s, i) => (
+              <div key={s.label} className="about-stat">
+                <div className="about-stat-value">
+                  {vals[i]}<span className="about-stat-suffix">{s.suffix}</span>
+                </div>
+                <div className="about-stat-label">{s.label}</div>
+              </div>
+            ))}
+          </div>
         </div>
 
-        {/* ── Stack + socials ── */}
+        {/* ── Socials ── */}
         <div className="about-aside">
-          <div className="about-stack">
-            <div className="about-aside-label">Stack</div>
-            <div className="about-pills">
-              {['React', 'Vite', 'Node.js', 'MySQL', 'SEO', 'UI/UX Design'].map(t => (
-                <span key={t} className="about-pill">{t}</span>
-              ))}
-            </div>
-          </div>
-
-          <div className="about-sep" />
-
           <div className="about-socials">
             <div className="about-aside-label">Contact</div>
             <a href="https://www.instagram.com/supacodigital/" target="_blank" rel="noreferrer" className="about-social-link">

@@ -10,6 +10,7 @@ import DevisGenerator from './components/DevisGenerator'
 import Projects from './components/Projects'
 import Testimonials from './components/Testimonials'
 import Zone from './components/Zone'
+import FAQ from './components/FAQ'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import Chatbot from './components/Chatbot'
@@ -43,7 +44,7 @@ export default function App() {
           onClose={() => { setDevisOpen(false); setDevisPlan(null) }}
         />
       )}
-      <Navbar navLogoRef={navLogoRef} onOpenCalendly={() => setCalendlyOpen(true)} onOpenDevis={openDevis} />
+      <Navbar navLogoRef={navLogoRef} onOpenCalendly={() => setCalendlyOpen(true)} />
       <main>
         <Hero onOpenCalendly={() => setCalendlyOpen(true)} />
         <div className="divider divider--dark" />
@@ -51,13 +52,15 @@ export default function App() {
         <div className="divider divider--dark" />
         <CodeEditor />
         <div className="divider divider--light" />
-        <Services onOpenDevis={openDevis} />
+        <Services onOpenCalendly={() => setCalendlyOpen(true)} />
         <div className="divider" />
         <Projects />
         <div className="divider" />
         <Testimonials />
         <div className="divider" />
         <Zone />
+        <div className="divider" />
+        <FAQ />
         <div className="divider" />
         <Contact onOpenCalendly={() => setCalendlyOpen(true)} />
       </main>

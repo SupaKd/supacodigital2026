@@ -16,69 +16,45 @@ function useIsMobile() {
 const plans = [
   {
     id: 'starter',
-    name: 'STARTER',
-    contactValue: 'Starter',
-    price: null,
-    setup: null,
-    commitment: 'Engagement 12 mois',
+    name: 'SITE VITRINE',
+    contactValue: 'Site Vitrine',
     color: 'var(--cyan)',
     glow: 'rgba(0,229,255,.15)',
     popular: false,
     surMesure: true,
-    cta: 'Choisir Starter',
+    cta: 'Demander un devis',
+    badge: '10% à la commande',
     sections: [
       {
-        label: 'VOTRE SITE',
+        label: 'CE QUI EST INCLUS',
         features: [
-          { text: "Jusqu'à 5 pages", included: true },
+          { text: "Jusqu'à 5 pages sur mesure", included: true },
+          { text: 'Design responsive mobile & desktop', included: true },
+          { text: 'Formulaire de contact', included: true },
           { text: 'Livraison en ~7 jours', included: true },
-          { text: 'Nom de domaine + hébergement offerts 1 an', included: true },
-          { text: 'SEO optimisé', included: false },
-          { text: 'Blog / actualités', included: false },
-          { text: 'Paiement en ligne', included: false },
-        ],
-      },
-      {
-        label: 'SUIVI INCLUS',
-        features: [
-          { text: '1 modification/mois', included: true },
-          { text: 'Support email — réponse sous 72h', included: true },
-          { text: 'Google Analytics', included: false },
-          { text: 'Formation à la prise en main', included: false },
+          { text: 'SEO de base', included: true },
         ],
       },
     ],
   },
   {
     id: 'pro',
-    name: 'PRO',
-    contactValue: 'Pro',
-    price: null,
-    setup: null,
-    commitment: 'Engagement 12 mois',
+    name: 'SITE PRO',
+    contactValue: 'Site Pro',
     color: '#1a6bff',
     glow: 'rgba(26,107,255,.2)',
     popular: true,
     surMesure: true,
-    cta: 'Choisir Pro',
+    cta: 'Demander un devis',
+    badge: '10% à la commande',
     sections: [
       {
-        label: 'VOTRE SITE',
+        label: 'CE QUI EST INCLUS',
         features: [
-          { text: "Jusqu'à 10 pages", included: true },
-          { text: 'Livraison en ~7 jours', included: true },
-          { text: 'Nom de domaine + hébergement offerts 1 an', included: true },
+          { text: "Jusqu'à 10 pages sur mesure", included: true },
+          { text: 'Design responsive mobile & desktop', included: true },
           { text: 'SEO on-page optimisé', included: true },
           { text: 'Blog & galerie de réalisations', included: true },
-          { text: 'Paiement en ligne', included: false },
-        ],
-      },
-      {
-        label: 'SUIVI INCLUS',
-        features: [
-          { text: '3 modifications/mois', included: true },
-          { text: 'Support email — réponse sous 48h', included: true },
-          { text: 'Google Analytics', included: true },
           { text: 'Formation à la prise en main', included: true },
         ],
       },
@@ -88,32 +64,21 @@ const plans = [
     id: 'ecommerce',
     name: 'E-COMMERCE',
     contactValue: 'E-Commerce',
-    price: null,
-    setup: null,
-    commitment: 'Engagement 12 mois',
     color: '#a855f7',
     glow: 'rgba(168,85,247,.15)',
     popular: false,
     noCommission: true,
-    cta: 'Choisir E-commerce',
+    cta: 'Demander un devis',
+    badge: '10% à la commande',
     sections: [
       {
-        label: 'VOTRE SITE',
+        label: 'CE QUI EST INCLUS',
         features: [
-          { text: 'Produits illimités', included: true },
-          { text: 'Paiement en ligne', included: true },
+          { text: 'Produits illimités — 0% de commission', included: true },
+          { text: 'Paiement en ligne intégré', included: true },
           { text: 'Dashboard admin & gestion stocks', included: true },
           { text: 'SEO on-page + Blog', included: true },
           { text: "Intégration produits (jusqu'à 30 réf.)", included: true },
-          { text: 'Livraison en ~2-3 semaines', included: true },
-        ],
-      },
-      {
-        label: 'SUIVI INCLUS',
-        features: [
-          { text: '5 modifications/mois', included: true },
-          { text: 'Support email — réponse sous 24h', included: true },
-          { text: 'Google Analytics', included: true },
           { text: 'Formation à la prise en main', included: true },
         ],
       },
@@ -123,31 +88,20 @@ const plans = [
     id: 'webapp',
     name: 'APP RESTAURANT',
     contactValue: 'App Restaurant',
-    price: null,
-    setup: null,
-    commitment: 'Engagement 12 mois',
     color: '#22c55e',
     glow: 'rgba(34,197,94,.15)',
     popular: false,
     noCommissionResto: true,
-    cta: 'Choisir App Restaurant',
+    cta: 'Demander un devis',
+    badge: '10% à la commande',
     sections: [
       {
-        label: 'VOTRE APP',
+        label: 'CE QUI EST INCLUS',
         features: [
           { text: 'Commande à emporter & livraison', included: true },
           { text: 'Paiement en ligne intégré', included: true },
           { text: 'Dashboard gérant (plats, commandes)', included: true },
           { text: 'SEO optimisé', included: true },
-          { text: 'Nouvelles fonctionnalités', included: false },
-        ],
-      },
-      {
-        label: 'SUIVI INCLUS',
-        features: [
-          { text: '3 mises à jour de contenu/mois', included: true },
-          { text: 'Support email — réponse sous 24h', included: true },
-          { text: 'Google Analytics', included: true },
           { text: 'Formation à la prise en main', included: true },
         ],
       },
@@ -155,7 +109,7 @@ const plans = [
   },
 ]
 
-function PricingCard({ plan, showArrow, onOpenDevis, active }) {
+function PricingCard({ plan, showArrow, onOpenCalendly, active }) {
   return (
     <div
       className={`pricing-card${plan.popular ? ' pricing-card--popular' : ''}${active ? ' pricing-card--active' : ''}`}
@@ -168,68 +122,59 @@ function PricingCard({ plan, showArrow, onOpenDevis, active }) {
         <span className="pricing-swipe-arrow-fixed">→</span>
       )}
 
-      <div className="pricing-header">
-        <div className="pricing-name">{plan.name}</div>
-
-        <div className="pricing-price">
-          <span className="pricing-amount pricing-amount--devis">Sur devis</span>
+      <div className="pricing-card-body">
+        <div className="pricing-header">
+          <div className="pricing-name">{plan.name}</div>
         </div>
 
-        <div className="pricing-setup">Tarif personnalisé selon votre projet</div>
-      </div>
+        {plan.surMesure && (
+          <div className="pricing-sur-mesure">
+            <span>100% sur mesure — zéro template</span>
+            <span className="pricing-sur-mesure-sub">Identité unique, rien que pour vous</span>
+          </div>
+        )}
+        {plan.noCommissionResto && (
+          <div className="pricing-no-commission-resto">
+            <span>0% de commission sur vos commandes</span>
+            <span className="pricing-no-commission-vs">vs Uber Eats jusqu'à 30%</span>
+          </div>
+        )}
+        {plan.noCommission && (
+          <div className="pricing-no-commission">
+            <span>0% de commission sur vos ventes</span>
+            <span className="pricing-no-commission-vs">vs Shopify jusqu'à 2%</span>
+          </div>
+        )}
 
-      {plan.surMesure && (
-        <div className="pricing-sur-mesure">
-          <span>100% sur mesure — zéro template</span>
-          <span className="pricing-sur-mesure-sub">Identité unique, rien que pour vous</span>
-        </div>
-      )}
-      {plan.noCommissionResto && (
-        <div className="pricing-no-commission-resto">
-          <span>0% de commission sur vos commandes</span>
-          <span className="pricing-no-commission-vs">vs Uber Eats jusqu'à 30%</span>
-        </div>
-      )}
-      {plan.noCommission && (
-        <div className="pricing-no-commission">
-          <span>0% de commission sur vos ventes</span>
-          <span className="pricing-no-commission-vs">vs Shopify jusqu'à 2%</span>
-        </div>
-      )}
+        <div className="pricing-divider" />
 
-      <div className="pricing-divider" />
-
-      {plan.sections.map(section => {
-        const visible = section.features
-        return (
+        {plan.sections.map(section => (
           <div key={section.label} className="pricing-section">
             <div className="pricing-section-label">{section.label}</div>
             <ul className="pricing-features">
-              {visible.map(f => (
+              {section.features.map(f => (
                 <li key={f.text} className={`pricing-feature${f.included ? '' : ' pricing-feature--off'}`}>
                   {f.included ? <Icon.Check /> : <Icon.XMark />}
                   {f.text}
                 </li>
               ))}
             </ul>
-            <div className="pricing-divider" />
           </div>
-        )
-      })}
+        ))}
+      </div>
 
-      <button
-        className="pricing-cta"
-        onClick={() => onOpenDevis(plan.id)}
-      >
-        {plan.cta}
-        <span className="pricing-cta-arrow"><Icon.Arrow /></span>
-      </button>
+      <div className="pricing-card-footer">
+        <button className="pricing-cta" onClick={() => onOpenCalendly()}>
+          {plan.cta}
+          <span className="pricing-cta-arrow"><Icon.Arrow /></span>
+        </button>
+      </div>
     </div>
   )
 }
 
 
-export default function Services({ onOpenDevis }) {
+export default function Services({ onOpenCalendly }) {
   const [activeIndex, setActiveIndex] = useState(0)
   const isMobile = useIsMobile()
   const touchStartX = useRef(null)
@@ -262,7 +207,7 @@ export default function Services({ onOpenDevis }) {
             key={plan.id}
             plan={plan}
             showArrow={false}
-            onOpenDevis={onOpenDevis}
+            onOpenCalendly={onOpenCalendly}
             active={!isMobile || activeIndex === i}
           />
         ))}
@@ -286,7 +231,7 @@ export default function Services({ onOpenDevis }) {
         <p className="custom-card-desc">
           Vous avez un projet hors catalogue ? Marketplace, SaaS, outil métier… On développe votre application sur mesure.
         </p>
-        <button className="custom-card-cta" onClick={() => onOpenDevis('custom')}>
+        <button className="custom-card-cta" onClick={() => onOpenCalendly()}>
           Discutons de votre projet
           <span className="custom-card-cta-arrow"><Icon.Arrow /></span>
         </button>

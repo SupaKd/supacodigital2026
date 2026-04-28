@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import { Icon } from '../icons'
 
-export default function Navbar({ navLogoRef, onOpenCalendly, onOpenDevis }) {
+export default function Navbar({ navLogoRef, onOpenCalendly }) {
   const [scrolled, setScrolled] = useState(false)
   const [visible, setVisible] = useState(true)
   const [menuOpen, setMenuOpen] = useState(false)
@@ -58,8 +58,8 @@ export default function Navbar({ navLogoRef, onOpenCalendly, onOpenDevis }) {
           </li>
         ))}
       </ul>
-      <button className="nav-cta" onClick={() => { closeMenu(); onOpenDevis(null) }}>
-        Créer un devis
+      <button className="nav-cta" onClick={() => { closeMenu(); onOpenCalendly() }}>
+        Prendre RDV
       </button>
     </div>,
     document.body
@@ -82,8 +82,8 @@ export default function Navbar({ navLogoRef, onOpenCalendly, onOpenDevis }) {
             ))}
           </ul>
 
-          <button onClick={() => onOpenDevis(null)} className="nav-cta">
-            Créer un devis
+          <button onClick={() => onOpenCalendly()} className="nav-cta">
+            Prendre RDV
           </button>
 
           <button

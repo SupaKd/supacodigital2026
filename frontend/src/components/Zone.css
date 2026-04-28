@@ -65,6 +65,36 @@
 
 .zone-pin { font-size: 13px; }
 
+.zone-pill--foreign {
+  border-color: rgba(168,85,247,.4);
+  color: rgba(168,85,247,.9);
+  background: rgba(168,85,247,.06);
+}
+
+.zone-pill--remote {
+  border-color: rgba(15,15,22,.12);
+  color: rgba(15,15,22,.35);
+  background: transparent;
+  font-style: italic;
+}
+
+/* ── Carte holographique ─────────────────────────────── */
+.zone-holo-canvas {
+  width: 100%;
+  max-width: 680px;
+  aspect-ratio: 16 / 9;
+  display: block;
+  border-radius: 12px;
+  border: 1px solid rgba(0,229,255,0.15);
+  box-shadow:
+    0 0 40px rgba(26,107,255,0.12),
+    0 0 0 1px rgba(26,107,255,0.08) inset;
+}
+
+@media (max-width: 640px) {
+  .zone-holo-canvas { aspect-ratio: 4 / 3; border-radius: 8px; }
+}
+
 @media (max-width: 768px) {
   .zone-inner { gap: 32px; }
 }
